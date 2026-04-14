@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seron | 外国人の声×多言語レビュー資産化で、インバウンド集客を加速</title>
+    <meta name="description" content="Seronはインバウンド特化の外国人集客プラットフォーム。外国人の声を収集し、多言語レビューを継続的に資産化。外国人に選ばれる仕組みを構築します。">
+    <meta property="og:title" content="Seron - インバウンド特化 外国人集客プラットフォーム">
+    <meta property="og:description" content="外国人の声×多言語レビューで、外国人観光客に継続的に選ばれる仕組みをつくります。">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #0B5E4F;
+            --primary-dark: #073D33;
+            --primary-darker: #041F19;
+            --accent: #C9A84C;
+            --accent-hover: #B89640;
+            --text-dark: #151515;
+            --text-body: #3a3a3a;
+            --text-muted: #6a6a6a;
+            --bg-white: #ffffff;
+            --bg-cream: #FAFAF7;
+            --bg-warm: #F5F4F0;
+            --border-light: #E8E6E1;
+            --radius: 10px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans JP', sans-serif; color: var(--text-dark); line-height: 1.8; background: var(--bg-white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+        button { font-family: inherit; cursor: pointer; }
+
+        /* ===== Utility ===== */
+        .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+        .section { padding: 6rem 0; }
+        .section-label { font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+        .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; color: var(--text-dark); line-height: 1.35; margin-bottom: 1rem; }
+        .section-subtitle { font-size: 1.05rem; color: var(--text-muted); max-width: 640px; line-height: 1.85; }
+        .section-center { text-align: center; }
+        .section-center .section-subtitle { margin: 0 auto 3rem; }
+        .section-center .section-label { display: block; }
+
+        /* ===== Fade In ===== */
+        .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== Header ===== */
+        .header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            height: 72px; transition: all 0.4s ease;
+            background: transparent;
+        }
+        .header.scrolled {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+        }
+        .header-inner { max-width: 1160px; margin: 0 auto; padding: 0 2rem; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 900; letter-spacing: 0.06em; color: white; transition: color 0.3s; }
+        .header.scrolled .logo { color: var(--primary); }
+        .nav-menu { display: flex; align-items: center; gap: 2.5rem; }
+        .nav-link { font-size: 0.88rem; font-weight: 500; color: rgba(255,255,255,0.75); transition: color 0.3s; }
+        .nav-link:hover { color: white; }
+        .header.scrolled .nav-link { color: var(--text-muted); }
+        .header.scrolled .nav-link:hover { color: var(--text-dark); }
+        .header-cta {
+            background: white; color: var(--primary); padding: 0.6rem 1.6rem;
+            border-radius: 50px; font-weight: 700; font-size: 0.85rem; border: none;
+            transition: all 0.3s ease; letter-spacing: 0.02em;
+        }
+        .header-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+        .header.scrolled .header-cta { background: var(--primary); color: white; }
+        .header.scrolled .header-cta:hover { background: var(--primary-dark); }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger span { display: block; width: 24px; height: 2.5px; background: white; border-radius: 2px; transition: background 0.3s; }
+        .header.scrolled .hamburger span { background: var(--primary); }
+        .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: white; padding: 2rem; box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-110%); opacity: 0; transition: all 0.35s ease; z-index: 999; }
+        .mobile-menu.active { transform: translateY(0); opacity: 1; }
+        .mobile-nav { display: flex; flex-direction: column; gap: 1.25rem; }
+        .mobile-nav-link { font-size: 1rem; font-weight: 600; color: var(--text-dark); padding: 0.75rem 0; border-bottom: 1px solid var(--border-light); }
+        .mobile-cta { margin-top: 0.75rem; background: var(--primary); color: white; padding: 1rem; text-align: center; border-radius: 50px; font-weight: 700; font-size: 0.95rem; display: block; }
+
+        /* ===== Hero ===== */
+        .hero {
+            position: relative; min-height: 100vh; display: flex; align-items: center;
+            background: linear-gradient(160deg, rgba(4,31,25,0.82) 0%, rgba(11,94,79,0.6) 60%, rgba(11,94,79,0.4) 100%),
+                        url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            color: white; overflow: hidden;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+            background: linear-gradient(to top, var(--bg-cream) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .hero-inner { position: relative; z-index: 2; max-width: 1160px; margin: 0 auto; padding: 8rem 2rem 6rem; width: 100%; }
+        .hero-badge {
+            display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.5);
+            color: #ffd966; padding: 0.45rem 1.4rem; border-radius: 50px;
+            font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem;
+        }
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 900;
+            line-height: 1.2; margin-bottom: 1.75rem; max-width: 720px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.25); letter-spacing: -0.01em;
+        }
+        .hero-title .accent { color: #ffd966; }
+        .hero-subtitle {
+            font-size: clamp(0.95rem, 2vw, 1.15rem); line-height: 1.9;
+            margin-bottom: 2.5rem; opacity: 0.92; max-width: 560px;
+        }
+        .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+        .cta-primary {
+            background: var(--accent); color: white; padding: 1rem 2.5rem;
+            border-radius: 50px; font-weight: 700; font-size: 1rem; border: none;
+            transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+            display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .cta-primary:hover { background: var(--accent-hover); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(201,168,76,0.35); }
+        .cta-secondary {
+            background: transparent; color: white; padding: 1rem 2.5rem;
+            border-radius: 50px; font-weight: 600; font-size: 1rem;
+            border: 1.5px solid rgba(255,255,255,0.45); transition: all 0.3s ease;
+        }
+        .cta-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.8); }
+
+        .hero-flow { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+        .flow-pill {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: white; padding: 0.45rem 1.1rem; border-radius: 50px;
+            font-size: 0.82rem; font-weight: 600; backdrop-filter: blur(6px);
+            white-space: nowrap;
+        }
+        .flow-arrow { font-size: 0.9rem; opacity: 0.4; color: #ffd966; }
+
+        .scroll-indicator {
+            position: absolute; bottom: 140px; left: 50%; transform: translateX(-50%); z-index: 5;
+        }
+        .scroll-indicator div {
+            width: 26px; height: 42px; border: 2px solid rgba(255,255,255,0.3); border-radius: 14px;
+            display: flex; align-items: flex-start; justify-content: center; padding-top: 8px;
+        }
+        .scroll-indicator span { width: 3px; height: 8px; background: rgba(255,255,255,0.5); border-radius: 2px; animation: scrollBounce 2s ease-in-out infinite; }
+        @keyframes scrollBounce { 0%,100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(6px); opacity: 1; } }
+
+        /* ===== Problem Section ===== */
+        .problem-section { background: var(--bg-cream); }
+        .problem-intro { text-align: center; max-width: 720px; margin: 0 auto 3rem; font-size: 1.05rem; color: var(--text-muted); line-height: 1.9; }
+        .problem-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+        .problem-card {
+            background: white; border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow-sm); transition: all 0.35s ease;
+            border-top: 3px solid transparent;
+        }
+        .problem-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-top-color: var(--primary); }
+        .problem-photo { width: 100%; height: 170px; object-fit: cover; }
+        .problem-card-body { padding: 1.75rem; }
+        .problem-card-body h3 { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.6rem; line-height: 1.5; }
+        .problem-card-body p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+        /* ===== About / Definition ===== */
+        .about-section { background: var(--bg-white); }
+        .definition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+        .definition-content h3 { font-size: 1.7rem; font-weight: 800; color: var(--primary); margin-bottom: 1.25rem; line-height: 1.4; }
+        .definition-content p { font-size: 1rem; color: var(--text-body); line-height: 1.9; margin-bottom: 1rem; }
+        .definition-pillars { list-style: none; margin: 1.5rem 0; }
+        .definition-pillars li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.85rem; font-size: 0.95rem; color: var(--text-dark); font-weight: 500; }
+        .definition-pillars li::before { content: ''; width: 7px; height: 7px; background: var(--primary); border-radius: 50%; flex-shrink: 0; margin-top: 0.55rem; }
+        .definition-highlight {
+            background: linear-gradient(135deg, rgba(11,94,79,0.06) 0%, rgba(201,168,76,0.06) 100%);
+            border-left: 4px solid var(--accent); padding: 1.25rem 1.5rem; border-radius: 6px; margin-top: 1.75rem;
+        }
+        .definition-highlight p { margin: 0; font-weight: 700; color: var(--primary-dark); font-size: 0.95rem; }
+        .definition-image { width: 100%; height: 420px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-md); }
+
+        /* ===== Features + Flow ===== */
+        .features-section { background: var(--bg-cream); }
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; margin-top: 2.5rem; margin-bottom: 4rem; }
+        .feature-card {
+            background: white; border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow-sm); transition: all 0.35s ease; border: 1px solid var(--border-light);
+        }
+        .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(11,94,79,0.2); }
+        .feature-image { width: 100%; height: 175px; object-fit: cover; }
+        .feature-content { padding: 1.5rem; }
+        .feature-number {
+            width: 34px; height: 34px; background: var(--primary); color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 800; margin-bottom: 0.75rem;
+        }
+        .feature-content h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.4rem; }
+        .feature-content p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+        .flow-divider { border: none; border-top: 2px dashed var(--border-light); margin: 0 0 3.5rem; }
+        .flow-heading { text-align: center; margin-bottom: 2.5rem; }
+        .flow-heading h3 { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin-bottom: 0.4rem; }
+        .flow-heading p { font-size: 0.95rem; color: var(--text-muted); }
+
+        .flow-diagram { max-width: 820px; margin: 0 auto; }
+        .flow-step { display: grid; grid-template-columns: 68px 1fr; gap: 1.5rem; margin-bottom: 2rem; position: relative; }
+        .flow-step:not(:last-child)::after {
+            content: ''; position: absolute; left: 34px; top: 68px; width: 2px;
+            height: calc(100% + 0.25rem);
+            background: linear-gradient(180deg, var(--primary) 0%, rgba(11,94,79,0.12) 100%);
+        }
+        .step-number {
+            width: 68px; height: 68px; background: var(--primary); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 900;
+            color: white; box-shadow: 0 4px 16px rgba(11,94,79,0.2); position: relative; z-index: 2;
+        }
+        .step-body {
+            background: white; padding: 1.5rem; border-radius: var(--radius);
+            box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);
+        }
+        .step-body h3 { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: 0.35rem; }
+        .step-body p { font-size: 0.9rem; color: var(--text-body); line-height: 1.7; }
+        .step-note { margin-top: 0.6rem; padding: 0.6rem 0.9rem; background: var(--bg-cream); border-radius: 6px; font-size: 0.82rem; color: var(--text-muted); }
+
+        /* ===== Value ===== */
+        .value-section { background: var(--bg-white); }
+        .value-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem; margin-top: 2.5rem; }
+        .value-card {
+            background: white; border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow-sm); transition: all 0.35s ease; border: 1px solid var(--border-light);
+        }
+        .value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .value-photo { width: 100%; height: 155px; object-fit: cover; }
+        .value-card-body { padding: 1.5rem; border-top: 3px solid var(--primary); }
+        .value-card-body h3 { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+        .value-card-body p { font-size: 0.9rem; color: var(--text-body); line-height: 1.8; }
+
+        /* ===== Trust / Track Record ===== */
+        .trust-section { background: var(--bg-cream); }
+        .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+        .trust-text h3 { font-size: 1.5rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 1rem; line-height: 1.4; }
+        .trust-text p { font-size: 0.95rem; line-height: 1.9; color: var(--text-body); }
+        .trust-source { margin-top: 1.25rem; font-size: 0.82rem; color: var(--text-muted); }
+        .trust-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        .trust-stat {
+            background: white; border: 1px solid var(--border-light); border-radius: var(--radius);
+            padding: 1.5rem; text-align: center; transition: all 0.3s ease;
+        }
+        .trust-stat:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+        .trust-stat-number {
+            font-family: 'Outfit', sans-serif; font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-weight: 900; color: var(--primary); line-height: 1; margin-bottom: 0.4rem; letter-spacing: -0.02em;
+        }
+        .trust-stat-label { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* ===== Target ===== */
+        .target-section { background: var(--bg-white); }
+        .target-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+        .target-card {
+            background: var(--bg-cream); border-radius: var(--radius); padding: 1.75rem;
+            border: 1px solid var(--border-light); transition: all 0.3s ease;
+        }
+        .target-card:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+        .target-card h3 { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.85rem; padding-bottom: 0.65rem; border-bottom: 2px solid var(--primary); }
+        .target-checklist { list-style: none; }
+        .target-checklist li {
+            display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.88rem;
+            color: var(--text-body); margin-bottom: 0.5rem; line-height: 1.5;
+        }
+        .target-checklist li::before { content: '✓'; color: var(--primary); font-weight: 800; flex-shrink: 0; }
+
+        /* ===== Comparison ===== */
+        .comparison-section { background: var(--bg-cream); overflow-x: auto; }
+        .comparison-table {
+            width: 100%; margin-top: 2.5rem; border-collapse: collapse; background: white;
+            border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md);
+        }
+        .comparison-table th {
+            background: var(--primary); color: white; padding: 1.25rem 1rem;
+            text-align: left; font-weight: 600; font-size: 0.9rem;
+        }
+        .comparison-table th:first-child { background: var(--primary-dark); }
+        .comparison-table th.seron-col {
+            background: var(--primary-dark); border-left: 2px solid var(--accent);
+            border-right: 2px solid var(--accent); border-top: 2px solid var(--accent);
+        }
+        .comparison-table td {
+            padding: 1.1rem 1rem; border-bottom: 1px solid #eee; font-size: 0.88rem; color: var(--text-body);
+        }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table td:first-child { font-weight: 600; color: var(--text-dark); background: var(--bg-cream); }
+        .comparison-table td.seron-col {
+            background: rgba(11,94,79,0.03); border-left: 2px solid var(--accent);
+            border-right: 2px solid var(--accent); font-weight: 600;
+        }
+        .comparison-table tr:last-child td.seron-col { border-bottom: 2px solid var(--accent); }
+        .check-icon { color: var(--primary); font-size: 1.1rem; }
+        .cross-icon { color: #ccc; font-size: 1.1rem; }
+        .comparison-summary { margin-top: 1.5rem; text-align: center; font-size: 0.92rem; color: var(--text-muted); }
+        .comparison-summary strong { color: var(--primary-dark); }
+
+        /* ===== Optional ===== */
+        .optional-section { background: var(--bg-white); padding: 4rem 0; }
+        .optional-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+        .optional-card {
+            background: var(--bg-cream); padding: 1.75rem; border-radius: var(--radius);
+            box-shadow: var(--shadow-sm); border-left: 4px solid var(--accent);
+        }
+        .optional-badge {
+            display: inline-block; background: var(--accent); color: white;
+            padding: 0.3rem 0.85rem; border-radius: 50px; font-size: 0.78rem; font-weight: 700; margin-bottom: 0.75rem;
+        }
+        .optional-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: 0.6rem; }
+        .optional-card p { font-size: 0.9rem; color: var(--text-body); line-height: 1.8; margin-bottom: 0.75rem; }
+        .optional-list { list-style: none; }
+        .optional-list li { padding-left: 1.4rem; position: relative; margin-bottom: 0.5rem; font-size: 0.86rem; color: var(--text-body); }
+        .optional-list li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-weight: 800; }
+
+        /* ===== After Section ===== */
+        .after-section { background: linear-gradient(150deg, var(--primary-darker) 0%, var(--primary) 100%); color: white; }
+        .after-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 3rem; }
+        .after-card {
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+            padding: 2rem; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.15);
+            transition: background 0.3s;
+        }
+        .after-card:hover { background: rgba(255,255,255,0.12); }
+        .after-icon { font-size: 1.8rem; margin-bottom: 0.85rem; }
+        .after-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
+        .after-card p { font-size: 0.9rem; line-height: 1.8; opacity: 0.92; }
+
+        /* ===== FAQ ===== */
+        .faq-section { background: var(--bg-cream); }
+        .faq-list { max-width: 700px; margin: 2.5rem auto 0; }
+        .faq-item { border-bottom: 1px solid var(--border-light); }
+        .faq-item:first-child { border-top: 1px solid var(--border-light); }
+        .faq-btn {
+            width: 100%; padding: 1.25rem 0; display: flex; align-items: center; justify-content: space-between;
+            gap: 1rem; text-align: left; background: none; border: none;
+            font-size: 0.98rem; font-weight: 600; color: var(--text-dark); cursor: pointer;
+        }
+        .faq-icon { width: 22px; height: 22px; flex-shrink: 0; color: var(--text-muted); transition: transform 0.3s; }
+        .faq-answer { display: none; padding-bottom: 1.25rem; }
+        .faq-answer p { font-size: 0.92rem; color: var(--text-body); line-height: 1.8; }
+        .faq-item.open .faq-answer { display: block; }
+        .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+        /* ===== Final CTA ===== */
+        .final-cta {
+            text-align: center; padding: 6rem 2rem;
+            background: var(--bg-white);
+        }
+        .final-cta-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: var(--primary-dark); margin-bottom: 1.25rem; line-height: 1.3; }
+        .final-cta-subtitle { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 580px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+        .final-cta-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+        .trust-badges { display: flex; gap: 1.75rem; justify-content: center; flex-wrap: wrap; }
+        .trust-badge-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: var(--text-muted); }
+        .trust-badge-icon {
+            width: 18px; height: 18px; background: rgba(11,94,79,0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: var(--primary); font-weight: 800;
+        }
+
+        /* ===== Contact Form ===== */
+        .contact-section { background: var(--bg-cream); padding: 5rem 2rem; }
+        .contact-container { max-width: 640px; margin: 0 auto; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 0.4rem; font-size: 0.92rem; }
+        .required { color: #d9534f; margin-left: 0.2rem; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 0.9rem 1rem; border: 1.5px solid var(--border-light);
+            border-radius: 8px; font-size: 0.95rem; font-family: inherit; transition: border-color 0.3s;
+            background: white;
+        }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
+        .form-group textarea { min-height: 130px; resize: vertical; }
+        .submit-button {
+            width: 100%; background: var(--accent); color: white; padding: 1.1rem;
+            border: none; border-radius: 50px; font-size: 1.05rem; font-weight: 700;
+            cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(201,168,76,0.25);
+            margin-top: 0.5rem;
+        }
+        .submit-button:hover { background: var(--accent-hover); transform: translateY(-2px); }
+        .submit-button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ===== Contact Next Steps ===== */
+        .contact-next-steps { margin-top: 2rem; border-top: 1px solid var(--border-light); padding-top: 1.5rem; }
+        .contact-next-steps h4 { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1rem; }
+        .next-steps-list { display: flex; flex-direction: column; gap: 0.6rem; }
+        .next-step-item { display: flex; align-items: flex-start; gap: 0.75rem; }
+        .next-step-num { width: 22px; height: 22px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 800; flex-shrink: 0; margin-top: 0.1rem; }
+        .next-step-text { font-size: 0.85rem; color: var(--text-body); line-height: 1.55; }
+        .next-step-text strong { color: var(--text-dark); font-weight: 700; }
+
+        /* ===== Mid CTA ===== */
+        .mid-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 3.5rem 0;
+        }
+        .mid-cta-inner { max-width: 720px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+        .mid-cta-text h3 { font-size: clamp(1.15rem, 2.5vw, 1.45rem); font-weight: 800; color: white; line-height: 1.4; margin-bottom: 0.4rem; }
+        .mid-cta-text p { font-size: 0.88rem; color: rgba(255,255,255,0.72); line-height: 1.6; }
+        .mid-cta-btn { background: var(--accent); color: white; padding: 0.9rem 2rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer; white-space: nowrap; transition: all 0.3s; box-shadow: 0 4px 16px rgba(201,168,76,0.3); display: inline-flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
+        .mid-cta-btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+        @media (max-width: 640px) { .mid-cta-inner { flex-direction: column; text-align: center; } }
+        #formStatus { margin-top: 1rem; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 600; display: none; }
+        #formStatus.success { display: block; background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        #formStatus.error { display: block; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .privacy-notice {
+            margin-top: 1.25rem; padding: 1rem 1.25rem; background: white; border-radius: 8px;
+            border: 1px solid var(--border-light); font-size: 0.8rem; color: var(--text-muted); line-height: 1.7;
+        }
+        .privacy-notice strong { color: var(--text-dark); }
+
+        /* ===== Company ===== */
+        .company-section { background: var(--bg-white); }
+        .company-table {
+            max-width: 640px; margin: 2.5rem auto 0; width: 100%; border-collapse: collapse;
+            background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+        .company-table tr { border-bottom: 1px solid var(--border-light); }
+        .company-table tr:last-child { border-bottom: none; }
+        .company-table th { width: 35%; padding: 1.1rem 1.25rem; background: var(--bg-cream); font-weight: 600; font-size: 0.88rem; color: var(--text-dark); text-align: left; vertical-align: top; }
+        .company-table td { padding: 1.1rem 1.25rem; font-size: 0.92rem; color: var(--text-body); line-height: 1.7; }
+
+        /* ===== Footer ===== */
+        .footer { background: var(--primary-darker); color: white; padding: 3.5rem 2rem 0; }
+        .footer-inner { max-width: 1160px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-logo { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 900; margin-bottom: 0.6rem; }
+        .footer-tagline { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 0.75rem; }
+        .footer-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 300px; }
+        .footer-column h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 1rem; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.6rem; }
+        .footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.55); transition: color 0.3s; }
+        .footer-links a:hover { color: white; }
+        .footer-cta-btn {
+            display: inline-block; margin-top: 0.75rem; background: var(--accent); color: white;
+            padding: 0.65rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700;
+            transition: background 0.3s;
+        }
+        .footer-cta-btn:hover { background: var(--accent-hover); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1); padding: 1.5rem 0;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+        .footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-legal a { font-size: 0.8rem; color: rgba(255,255,255,0.4); transition: color 0.3s; }
+        .footer-legal a:hover { color: white; }
+
+        /* ===== Monitor Section ===== */
+        .monitor-section { background: var(--bg-cream); }
+        .monitor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+        .monitor-content h3 { font-size: 1.5rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 1rem; line-height: 1.4; }
+        .monitor-content p { font-size: 0.95rem; line-height: 1.9; color: var(--text-body); margin-bottom: 1rem; }
+        .monitor-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+        .monitor-tag { background: rgba(11,94,79,0.08); border: 1px solid rgba(11,94,79,0.2); color: var(--primary-dark); padding: 0.45rem 1rem; border-radius: 50px; font-size: 0.82rem; font-weight: 600; }
+        .monitor-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        .monitor-stat { background: white; border: 1px solid var(--border-light); border-radius: var(--radius); padding: 1.5rem; text-align: center; transition: all 0.3s ease; }
+        .monitor-stat:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+        .monitor-stat-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .monitor-stat-label { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.3rem; }
+        .monitor-stat-value { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 800; color: var(--primary); }
+
+        /* ===== Case Studies ===== */
+        .cases-section { background: var(--bg-white); }
+        .cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem; }
+        .case-card { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: all 0.35s ease; }
+        .case-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .case-photo { width: 100%; height: 180px; object-fit: cover; }
+        .case-body { padding: 1.75rem; }
+        .case-type { display: inline-block; background: rgba(11,94,79,0.08); color: var(--primary-dark); border: 1px solid rgba(11,94,79,0.2); padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.78rem; font-weight: 700; margin-bottom: 1rem; }
+        .case-before { margin-bottom: 1.25rem; background: #fff5f5; border: 1.5px solid #ffcdd2; border-radius: 8px; padding: 1rem 1.1rem; }
+        .case-before-label { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 800; color: #c62828; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.65rem; }
+        .case-before ul { list-style: none; }
+        .case-before ul li { font-size: 0.9rem; color: #5a2020; margin-bottom: 0.45rem; padding-left: 1.3rem; position: relative; line-height: 1.5; font-weight: 500; }
+        .case-before ul li::before { content: '✕'; position: absolute; left: 0; color: #e53935; font-size: 0.78rem; font-weight: 800; top: 0.05rem; }
+        .case-divider { border: none; border-top: 2px dashed var(--border-light); margin: 1.25rem 0; }
+        .case-after-label { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+        .case-results { display: flex; flex-direction: column; gap: 0.55rem; }
+        .case-result {
+            background: white; border-radius: 10px;
+            border: 1px solid var(--border-light);
+            padding: 0.9rem 1rem;
+            transition: box-shadow 0.2s;
+        }
+        .case-result:hover { box-shadow: var(--shadow-sm); border-color: rgba(11,94,79,0.2); }
+        .case-result-top { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.45rem; }
+        .case-result-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; flex: 0 0 6.5rem; }
+        .case-result-track { display: flex; align-items: center; gap: 0.5rem; flex: 1; }
+        .case-result-before { font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 700; color: #bdbdbd; text-decoration: line-through; white-space: nowrap; }
+        .case-result-arrow { font-size: 1rem; color: var(--accent); flex-shrink: 0; }
+        .case-result-after { font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 900; color: var(--primary); white-space: nowrap; }
+        .case-result-insight { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; padding-left: 7.25rem; border-top: 1px dashed var(--border-light); padding-top: 0.4rem; }
+        .cases-note { text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: 1.5rem; }
+
+        /* ===== Pricing ===== */
+        .pricing-section { background: var(--bg-cream); }
+        .pricing-wrapper { max-width: 680px; margin: 2.5rem auto 0; }
+        .pricing-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); border: 2px solid var(--accent); }
+        .pricing-badge-top { background: var(--accent); color: white; text-align: center; padding: 0.6rem; font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+        .pricing-body { padding: 2.5rem 2.5rem 2rem; text-align: center; }
+        .pricing-plan-name { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.75rem; }
+        .pricing-price { margin: 1rem 0 0.5rem; }
+        .pricing-price .price-num { font-family: 'Outfit', sans-serif; font-size: 3.5rem; font-weight: 900; color: var(--primary); line-height: 1; }
+        .pricing-price .price-unit { font-size: 1.1rem; color: var(--text-muted); font-weight: 600; }
+        .pricing-price .price-cross { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-muted); text-decoration: line-through; opacity: 0.5; }
+        .pricing-deadline { display: inline-block; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.4); color: #8a6a1a; border-radius: 50px; padding: 0.4rem 1.2rem; font-size: 0.82rem; font-weight: 700; margin: 0.75rem 0 1.5rem; }
+        .pricing-features { list-style: none; text-align: left; margin: 1.5rem 0; border-top: 1px solid var(--border-light); padding-top: 1.5rem; }
+        .pricing-features li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.92rem; color: var(--text-body); margin-bottom: 0.75rem; }
+        .pricing-features li::before { content: '✓'; color: var(--primary); font-weight: 800; flex-shrink: 0; margin-top: 0.05rem; }
+        .pricing-contract { background: var(--bg-cream); border-radius: 8px; padding: 1.25rem 1.5rem; margin-top: 0.5rem; text-align: left; }
+        .pricing-contract h4 { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+        .pricing-contract ul { list-style: none; }
+        .pricing-contract ul li { font-size: 0.85rem; color: var(--text-body); margin-bottom: 0.4rem; padding-left: 1rem; position: relative; }
+        .pricing-contract ul li::before { content: '›'; position: absolute; left: 0; color: var(--primary); font-weight: 700; }
+        .pricing-cta { margin-top: 2rem; }
+        .pricing-cta .cta-primary { width: 100%; justify-content: center; font-size: 1rem; padding: 1.1rem; border: none; border-radius: 50px; }
+        .pricing-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem; }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1024px) {
+            .definition-grid, .trust-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .definition-image { height: 280px; order: -1; }
+            .features-grid { grid-template-columns: 1fr 1fr; }
+            .target-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .section { padding: 4rem 0; }
+            .nav-menu { display: none; }
+            .hamburger { display: flex; }
+            .problem-cards, .features-grid, .value-cards, .after-grid, .optional-grid, .trust-stats { grid-template-columns: 1fr; }
+            .target-grid { grid-template-columns: 1fr; }
+            .flow-step { grid-template-columns: 52px 1fr; gap: 1rem; }
+            .step-number { width: 52px; height: 52px; font-size: 1.2rem; }
+            .flow-step:not(:last-child)::after { left: 26px; top: 52px; }
+            .hero-inner { padding: 7rem 1.5rem 5rem; }
+            .hero-flow { gap: 0.5rem; }
+            .flow-pill { font-size: 0.75rem; padding: 0.35rem 0.85rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .comparison-table { font-size: 0.82rem; }
+            .comparison-table th, .comparison-table td { padding: 0.85rem 0.6rem; }
+            .scroll-indicator { display: none; }
+            .monitor-grid, .cases-grid { grid-template-columns: 1fr; }
+            .monitor-stats { grid-template-columns: 1fr 1fr; }
+            .pricing-body { padding: 1.75rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header" id="header">
+    <div class="header-inner">
+        <div class="logo">Seron</div>
+        <nav class="nav-menu">
+            <a href="#about" class="nav-link">サービス</a>
+            <a href="#flow" class="nav-link">仕組み</a>
+            <a href="#trust" class="nav-link">実績</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <button class="header-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">無料相談 →</button>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <nav class="mobile-nav">
+        <a href="#about" class="mobile-nav-link">サービス</a>
+        <a href="#flow" class="mobile-nav-link">仕組み</a>
+        <a href="#trust" class="mobile-nav-link">実績</a>
+        <a href="#faq" class="mobile-nav-link">FAQ</a>
+        <a href="#contact" class="mobile-cta">無料相談を申し込む</a>
+    </nav>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">Inbound Platform</div>
+        <h1 class="hero-title">
+            日本語レビューしかない店舗に、<br>
+            <span class="accent">外国人客は来ない。</span>
+        </h1>
+        <p class="hero-subtitle">
+            外国人の声を収集し、多言語レビューを継続的に資産化。<br>
+            インバウンド特化のSeronが、あなたの店舗を<br>
+            "外国人に選ばれる状態"に変えます。
+        </p>
+        <div class="hero-cta-group">
+            <button class="cta-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                無料相談を申し込む
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <button class="cta-secondary" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">サービス詳細を見る</button>
+        </div>
+        <div class="hero-flow">
+            <span class="flow-pill">外国人の声を収集</span>
+            <span class="flow-arrow">›</span>
+            <span class="flow-pill">フィードバック分析</span>
+            <span class="flow-arrow">›</span>
+            <span class="flow-pill">多言語レビュー資産化</span>
+            <span class="flow-arrow">›</span>
+            <span class="flow-pill">継続的な集客強化</span>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <div><span></span></div>
+    </div>
+</section>
+
+<!-- Problem -->
+<section class="section problem-section">
+    <div class="container">
+        <div class="section-center fade-in">
+            <span class="section-label">Challenge</span>
+            <h2 class="section-title">外国語レビューがない店舗は、<br>外国人観光客の選択肢に入らない。</h2>
+            <p class="section-subtitle">
+                「外国人観光客を増やしたい」と思っても、多くの店舗・施設が同じ壁にぶつかっています。<br>
+                外国人旅行者が頼りにするのは、自分の言葉で書かれたリアルな口コミ。それがなければ、最初から候補に上がりません。
+            </p>
+        </div>
+        <div class="problem-cards fade-in">
+            <div class="problem-card">
+                <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=600&q=80" alt="多言語レビューが少ない" class="problem-photo">
+                <div class="problem-card-body">
+                    <h3>外国語レビューがゼロ。<br>選択肢にすら入らない。</h3>
+                    <p>外国人旅行者は母国語の口コミで店を選びます。日本語レビューだけでは、最初から候補に上がりません。</p>
+                </div>
+            </div>
+            <div class="problem-card">
+                <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600&q=80" alt="外国人の本音が分からない" class="problem-photo">
+                <div class="problem-card-body">
+                    <h3>改善したくても、<br>外国人の本音がわからない。</h3>
+                    <p>何が評価され、何が不満か。外国人目線の詳細なフィードバックを得る手段がなく、改善サイクルが回らない。</p>
+                </div>
+            </div>
+            <div class="problem-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="情報が蓄積されない" class="problem-photo">
+                <div class="problem-card-body">
+                    <h3>一時的な施策で終わり、<br>翌年また同じ問題が起きる。</h3>
+                    <p>広告は止めれば消える。外国人向けの信頼情報を資産として積み上げる仕組みがない。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section class="section about-section" id="about">
+    <div class="container fade-in">
+        <div class="section-center">
+            <span class="section-label">About</span>
+            <h2 class="section-title">Seronとは</h2>
+            <p class="section-subtitle">
+                レビュー獲得代行でも、コンサルでもありません。<br>
+                外国人に選ばれる仕組みそのものを提供するプラットフォームです。
+            </p>
+        </div>
+        <div class="definition-grid">
+            <div class="definition-content">
+                <h3>外国人に選ばれる状態を、<br>仕組みとして作る。</h3>
+                <p>外国人の声を収集し、深いフィードバックと多言語レビューを蓄積。外国人観光客の検索・選択に継続的に影響を与え続けます。</p>
+                <ul class="definition-pillars">
+                    <li>ターゲット国籍に合わせた外国人の声を収集</li>
+                    <li>外国人目線のフィードバックを収集・分析</li>
+                    <li>多言語レビューを資産として継続蓄積</li>
+                    <li>GBP・OTA展開でさらに集客を最大化（オプション）</li>
+                </ul>
+                <div class="definition-highlight">
+                    <p>広告やコンサルと違い、資産として積み上がり続ける仕組みを提供します。</p>
+                </div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=800&q=80" alt="外国人観光客" class="definition-image">
+        </div>
+    </div>
+</section>
+
+<!-- Features + Flow -->
+<section class="section features-section" id="flow">
+    <div class="container">
+        <div class="section-center fade-in">
+            <span class="section-label">Service</span>
+            <h2 class="section-title">外国人集客の仕組み、すべて提供します</h2>
+            <p class="section-subtitle">外国人の声の収集・フィードバック分析・多言語レビュー資産化の3つの柱</p>
+        </div>
+        <div class="features-grid fade-in">
+            <div class="feature-card">
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80" alt="外国人の声を収集" class="feature-image">
+                <div class="feature-content">
+                    <div class="feature-number">1</div>
+                    <h3>外国人のリアルな声を収集</h3>
+                    <p>ターゲット国籍・属性に合わせた外国人から、サービスへの率直な声とインサイトを収集します。</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80" alt="フィードバック収集" class="feature-image">
+                <div class="feature-content">
+                    <div class="feature-number">2</div>
+                    <h3>外国人目線のフィードバック</h3>
+                    <p>単なる評価だけでなく、改善点・魅力・不便な点など外国人目線での詳細なフィードバックを収集します。</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=800&q=80" alt="多言語レビュー蓄積" class="feature-image">
+                <div class="feature-content">
+                    <div class="feature-number">3</div>
+                    <h3>多言語レビュー資産化</h3>
+                    <p>英語・中国語・韓国語などの多言語レビューを継続蓄積。外国人の信頼獲得につながる資産を形成します。</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Value -->
+<section class="section value-section">
+    <div class="container">
+        <div class="section-center fade-in">
+            <span class="section-label">Value</span>
+            <h2 class="section-title">Seronが提供する価値</h2>
+            <p class="section-subtitle">外国人集客を一時的な施策で終わらせず、継続的な資産として蓄積</p>
+        </div>
+        <div class="value-cards fade-in">
+            <div class="value-card">
+                <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=800&q=80" alt="多言語レビューを資産化" class="value-photo">
+                <div class="value-card-body">
+                    <h3>多言語レビューを資産化</h3>
+                    <p>収集した声を多言語レビューとして継続蓄積。広告と違い、止めても消えない資産として機能し続けます。</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80" alt="改善サイクル" class="value-photo">
+                <div class="value-card-body">
+                    <h3>外国人目線での改善サイクル</h3>
+                    <p>フィードバックをもとにサービス・メニュー・多言語対応を改善。根拠あるPDCAで「選ばれる状態」を強化します。</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" alt="GBP・OTA展開" class="value-photo">
+                <div class="value-card-body">
+                    <h3>GBP・OTA展開で最大化（オプション）</h3>
+                    <p>蓄積したレビュー資産をGoogleビジネスプロフィールやTripAdvisorに展開。検索順位向上・予約導線を強化。</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="持続可能な仕組み" class="value-photo">
+                <div class="value-card-body">
+                    <h3>プラットフォームだから持続可能</h3>
+                    <p>運用代行ではなく「仕組み」として提供。外部に依存せず、自社の集客力を継続的に高め続けられます。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Monitor -->
+<section class="section monitor-section">
+    <div class="container fade-in">
+        <div class="section-center">
+            <span class="section-label">Our Network</span>
+            <h2 class="section-title">モニターは「在日外国人」の<br>独自コミュニティ</h2>
+            <p class="section-subtitle">一般的なクラウドソーシングとは違います。日本の飲食・文化を日常的に発信する、質の高い在日外国人だけが参加するコミュニティです。</p>
+        </div>
+        <div class="monitor-grid">
+            <div class="monitor-content">
+                <h3>「本当に日本を知っている」<br>外国人の声だけを集める。</h3>
+                <p>Seronのモニターは、日本国内に在住し、飲食店・観光地・文化体験などを日常的にSNSで発信・投稿している外国人で構成された独自コミュニティです。</p>
+                <p>単なるアルバイトではなく、日本のリアルを肌で知り、自国語で情報発信し続けているユーザーだからこそ、外国人観光客に刺さるリアルな声が生まれます。</p>
+                <p>全員の個人情報を適切に管理・審査しているため、質の低いユーザーは存在しません。コミュニティは現在も会員数が増加中です。</p>
+                <div class="monitor-tags">
+                    <span class="monitor-tag">🇺🇸 アメリカ</span>
+                    <span class="monitor-tag">🇬🇧 イギリス</span>
+                    <span class="monitor-tag">🇫🇷 フランス</span>
+                    <span class="monitor-tag">🇨🇳 中国</span>
+                    <span class="monitor-tag">🇰🇷 韓国</span>
+                    <span class="monitor-tag">🇹🇼 台湾</span>
+                    <span class="monitor-tag">他多数</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="monitor-stat">
+                    <div class="monitor-stat-icon">🏠</div>
+                    <div class="monitor-stat-value">在日外国人限定</div>
+                    <div class="monitor-stat-label">日本のリアルを知る<br>生活者の視点</div>
+                </div>
+                <div class="monitor-stat">
+                    <div class="monitor-stat-icon">📱</div>
+                    <div class="monitor-stat-value">SNS発信者</div>
+                    <div class="monitor-stat-label">日常的に日本の飲食・文化を<br>自国語で投稿</div>
+                </div>
+                <div class="monitor-stat">
+                    <div class="monitor-stat-icon">🔒</div>
+                    <div class="monitor-stat-value">個人情報管理済み</div>
+                    <div class="monitor-stat-label">審査・登録制で<br>質を担保</div>
+                </div>
+                <div class="monitor-stat">
+                    <div class="monitor-stat-icon">📈</div>
+                    <div class="monitor-stat-value">会員数増加中</div>
+                    <div class="monitor-stat-label">独自コミュニティを<br>継続的に拡大</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Cases -->
+<section class="section cases-section">
+    <div class="container">
+        <div class="section-center fade-in">
+            <span class="section-label">Case Study</span>
+            <h2 class="section-title">導入事例</h2>
+            <p class="section-subtitle">実際にSeronを導入した事業者の、3ヶ月後の変化</p>
+        </div>
+        <div class="cases-grid fade-in">
+            <div class="case-card">
+                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80" alt="カフェ導入事例" class="case-photo">
+                <div class="case-body">
+                    <span class="case-type">業種：飲食店（カフェ）</span>
+                    <div class="case-before">
+                        <div class="case-before-label">⚠ 導入前の課題</div>
+                        <ul>
+                            <li>検索順位が10位以下で埋もれている</li>
+                            <li>外国人客がほぼゼロ</li>
+                            <li>レビュー獲得が月わずか2件</li>
+                        </ul>
+                    </div>
+                    <hr class="case-divider">
+                    <div class="case-after-label">✦ 導入3ヶ月後の成果</div>
+                    <div class="case-results">
+                        <div class="case-result">
+                            <div class="case-result-top">
+                                <div class="case-result-label">検索順位</div>
+                                <div class="case-result-track">
+                                    <span class="case-result-before">10位以下</span>
+                                    <span class="case-result-arrow">→</span>
+                                    <span class="case-result-after">2位</span>
+                                </div>
+                            </div>
+                            <div class="case-result-insight">Googleマップで外国人旅行者の目に入る確率が飛躍的に向上。上位表示が新規流入を継続的に生む状態へ。</div>
+                        </div>
+                        <div class="case-result">
+                            <div class="case-result-top">
+                                <div class="case-result-label">外国人来客数</div>
+                                <div class="case-result-track">
+                                    <span class="case-result-before">ほぼ0</span>
+                                    <span class="case-result-arrow">→</span>
+                                    <span class="case-result-after">日2組</span>
+                                </div>
+                            </div>
+                            <div class="case-result-insight">月換算で約60組の新規外国人客。グループ単価を加味すると、売上への直接インパクトも大きい。</div>
+                        </div>
+                        <div class="case-result">
+                            <div class="case-result-top">
+                                <div class="case-result-label">レビュー評価</div>
+                                <div class="case-result-track">
+                                    <span class="case-result-before">日本語のみ</span>
+                                    <span class="case-result-arrow">→</span>
+                                    <span class="case-result-after">★+0.2</span>
+                                </div>
+                            </div>
+                            <div class="case-result-insight">多言語レビューの蓄積が評価を押し上げ、さらなる外国人客を呼び込む好循環が生まれている。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-card">
+                <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80" alt="美容エステ導入事例" class="case-photo">
+                <div class="case-body">
+                    <span class="case-type">業種：美容エステ</span>
+                    <div class="case-before">
+                        <div class="case-before-label">⚠ 導入前の課題</div>
+                        <ul>
+                            <li>検索順位が圏外で存在を知られていない</li>
+                            <li>外国人のウォークインがゼロ</li>
+                            <li>OTA未展開で予約導線がない</li>
+                        </ul>
+                    </div>
+                    <hr class="case-divider">
+                    <div class="case-after-label">✦ 導入3ヶ月後の成果</div>
+                    <div class="case-results">
+                        <div class="case-result">
+                            <div class="case-result-top">
+                                <div class="case-result-label">GBP流入数</div>
+                                <div class="case-result-track">
+                                    <span class="case-result-before">圏外</span>
+                                    <span class="case-result-arrow">→</span>
+                                    <span class="case-result-after">月9組</span>
+                                </div>
+                            </div>
+                            <div class="case-result-insight">広告費ゼロでGoogleマップから安定した集客チャネルが確立。放置しても流入が続く状態に。</div>
+                        </div>
+                        <div class="case-result">
+                            <div class="case-result-top">
+                                <div class="case-result-label">OTA予約数</div>
+                                <div class="case-result-track">
+                                    <span class="case-result-before">0組</span>
+                                    <span class="case-result-arrow">→</span>
+                                    <span class="case-result-after">月6組</span>
+                                </div>
+                            </div>
+                            <div class="case-result-insight">新たな予約チャネルが開通し、閑散期の売上底上げにも貢献。収益の安定化につながっている。</div>
+                        </div>
+                        <div class="case-result">
+                            <div class="case-result-top">
+                                <div class="case-result-label">外国人レビュー比率</div>
+                                <div class="case-result-track">
+                                    <span class="case-result-before">0%</span>
+                                    <span class="case-result-arrow">→</span>
+                                    <span class="case-result-after">3割</span>
+                                </div>
+                            </div>
+                            <div class="case-result-insight">外国語レビューが積み上がることで、さらなる外国人客が検索で見つけやすくなる自己強化サイクルへ。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="cases-note">※ 掲載事例はクライアント許諾のもと公開。成果は個別の環境・施策により異なります。</p>
+    </div>
+</section>
+
+<!-- Mid CTA -->
+<div class="mid-cta">
+    <div class="mid-cta-inner fade-in">
+        <div class="mid-cta-text">
+            <h3>同じ変化を、あなたの店舗でも。</h3>
+            <p>まずは現状をお聞かせください。課題に合わせた<br>プランを無料でご提案します。</p>
+        </div>
+        <button class="mid-cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            無料相談を申し込む →
+        </button>
+    </div>
+</div>
+
+<!-- Target -->
+<section class="section target-section">
+    <div class="container">
+        <div class="section-center fade-in">
+            <span class="section-label">For Whom</span>
+            <h2 class="section-title">こんな事業者におすすめ</h2>
+        </div>
+        <div class="target-grid fade-in">
+            <div class="target-card">
+                <h3>外国人集客を始めたい</h3>
+                <ul class="target-checklist">
+                    <li>インバウンド需要を取り込みたい</li>
+                    <li>何から始めればいいかわからない</li>
+                    <li>飲食・宿泊・体験施設を運営</li>
+                </ul>
+            </div>
+            <div class="target-card">
+                <h3>外国人の情報が不足</h3>
+                <ul class="target-checklist">
+                    <li>多言語レビューがゼロまたは少ない</li>
+                    <li>外国人の声を集める手段がない</li>
+                    <li>外国人視点での改善点が不明</li>
+                </ul>
+            </div>
+            <div class="target-card">
+                <h3>持続的に集客したい</h3>
+                <ul class="target-checklist">
+                    <li>広告費に頼らず集客を安定させたい</li>
+                    <li>GBP・OTAで検索上位を目指したい</li>
+                    <li>外国人の来店・予約を増やしたい</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Optional -->
+<section class="optional-section">
+    <div class="container fade-in">
+        <div class="section-center">
+            <span class="section-label">Option</span>
+            <h2 class="section-title" style="font-size:clamp(1.4rem,3vw,1.9rem);">GBP・OTA支援（オプション）</h2>
+            <p class="section-subtitle" style="margin-bottom:2rem;">蓄積したレビュー資産を最大限に活用</p>
+        </div>
+        <div class="optional-grid">
+            <div class="optional-card">
+                <div class="optional-badge">オプション</div>
+                <h3>Googleビジネスプロフィール最適化</h3>
+                <p>多言語レビューをGoogleマップに展開。検索順位向上・来店促進につなげます。</p>
+                <ul class="optional-list">
+                    <li>GBPプロフィール最適化</li>
+                    <li>多言語レビュー投稿代行</li>
+                    <li>インサイト分析・改善提案</li>
+                </ul>
+            </div>
+            <div class="optional-card">
+                <div class="optional-badge">オプション</div>
+                <h3>OTA連携・予約導線構築</h3>
+                <p>TripAdvisor・booking.comなどに多言語レビューを展開。予約導線を強化します。</p>
+                <ul class="optional-list">
+                    <li>OTA掲載設計・プロフィール作成</li>
+                    <li>多言語レビュー活用サポート</li>
+                    <li>予約導線最適化・分析</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- After -->
+<section class="section after-section">
+    <div class="container fade-in">
+        <div class="section-center">
+            <span class="section-label" style="color:#ffd966;">After Seron</span>
+            <h2 class="section-title" style="color:white;">Seron導入後の変化</h2>
+            <p class="section-subtitle" style="color:rgba(255,255,255,0.8);">外国人に選ばれる状態を、継続的に強化</p>
+        </div>
+        <div class="after-grid">
+            <div class="after-card">
+                <div class="after-icon">📝</div>
+                <h3>多言語レビューが継続的に増える</h3>
+                <p>英語・中国語などの多言語レビューが毎月蓄積。外国人観光客が検索・選択する際の信頼情報が充実します。</p>
+            </div>
+            <div class="after-card">
+                <div class="after-icon">🔄</div>
+                <h3>外国人目線でサービスが改善される</h3>
+                <p>フィードバックをもとにメニュー・多言語対応・接客が改善。外国人に選ばれやすい店舗へ進化します。</p>
+            </div>
+            <div class="after-card">
+                <div class="after-icon">📊</div>
+                <h3>レビュー資産が蓄積される</h3>
+                <p>一時的な広告ではなく、継続的に外国人集客に貢献する資産が形成。長期的な集客力が向上します。</p>
+            </div>
+            <div class="after-card">
+                <div class="after-icon">📈</div>
+                <h3>外国人の来店・予約が増加</h3>
+                <p>多言語レビューが充実することで検索順位向上・予約導線が強化され、実際の来店が増えます。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section class="section pricing-section" id="pricing">
+    <div class="container">
+        <div class="section-center fade-in">
+            <span class="section-label">Pricing</span>
+            <h2 class="section-title">料金プラン</h2>
+            <p class="section-subtitle">まずは3ヶ月、無料でお試しください。</p>
+        </div>
+        <div class="pricing-wrapper fade-in">
+            <div class="pricing-card">
+                <div class="pricing-badge-top">🎉 Limited — 2026年6月末まで限定</div>
+                <div class="pricing-body">
+                    <div class="pricing-plan-name">POC Plan</div>
+                    <div class="pricing-price">
+                        <div style="font-size:0.88rem; color:var(--text-muted); margin-bottom:0.4rem;">通常価格 <span class="price-cross">¥50,000 / 月</span></div>
+                        <span class="price-num">¥0</span>
+                        <span class="price-unit">/ 3ヶ月（無料）</span>
+                    </div>
+                    <div class="pricing-deadline">📅 2026年6月末まで 無料トライアル実施中</div>
+                    <ul class="pricing-features">
+                        <li>ターゲット国籍に合わせた外国人モニターによる実体験・声の収集</li>
+                        <li>外国人目線のフィードバック分析・改善レポート</li>
+                        <li>英語・中国語・韓国語などの多言語レビュー作成・投稿</li>
+                        <li>月次レポート（レビュー蓄積数・集客データ）</li>
+                        <li>ヒアリング・戦略設計（初回）</li>
+                    </ul>
+                    <div class="pricing-contract">
+                        <h4>契約条件</h4>
+                        <ul>
+                            <li>3ヶ月ごとの契約更新制</li>
+                            <li>成果を感じたタイミングで随時解約可能（次回更新前にご連絡ください）</li>
+                            <li>GBP・OTA展開はオプション料金（別途ご相談）</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <button class="cta-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                            無料で相談・申し込む
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq-section" id="faq">
+    <div class="container">
+        <div class="section-center fade-in">
+            <span class="section-label">FAQ</span>
+            <h2 class="section-title">よくある質問</h2>
+        </div>
+        <div class="faq-list fade-in">
+            <div class="faq-item">
+                <button class="faq-btn" onclick="toggleFaq(this)">
+                    <span>レビューはサクラではないのですか？</span>
+                    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+                <div class="faq-answer"><p>いいえ。すべて実際にサービスを体験した外国人によるリアルなレビューです。体験に基づく率直な感想をそのまま反映します。</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-btn" onclick="toggleFaq(this)">
+                    <span>どの国籍の外国人が対応可能ですか？</span>
+                    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+                <div class="faq-answer"><p>アメリカ、イギリス、フランス、中国、韓国、台湾など多国籍のネットワークがあります。ターゲット国籍に合わせてご提案します。</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-btn" onclick="toggleFaq(this)">
+                    <span>どのエリアで利用できますか？</span>
+                    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+                <div class="faq-answer"><p>現在は大阪・京都・東京の観光エリアが中心です。他エリアも順次拡大予定ですので、お気軽にご相談ください。</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-btn" onclick="toggleFaq(this)">
+                    <span>レビューの内容は指定できますか？</span>
+                    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+                <div class="faq-answer"><p>レビュー内容の指定はできません。リアルな体験に基づく率直なレビューをお届けします。だからこそ信頼性の高い資産になります。</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-btn" onclick="toggleFaq(this)">
+                    <span>費用はどのくらいかかりますか？</span>
+                    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </button>
+                <div class="faq-answer"><p>2026年6月末まで、POCプランとして3ヶ月間無料でご利用いただけます。通常料金は無料期間終了後に別途ご案内します。まずはお気軽にご相談ください。</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+    <div class="container fade-in">
+        <h2 class="final-cta-title">インバウンド集客を、<br>次のフェーズへ。</h2>
+        <p class="final-cta-subtitle">
+            外国人の声を収集し、多言語レビューを資産化。<br>
+            まずは無料相談で、あなたの店舗の課題をお聞かせください。
+        </p>
+        <div class="final-cta-buttons">
+            <button class="cta-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" style="font-size:1.05rem; padding:1.15rem 3rem;">
+                無料相談を申し込む
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="section contact-section" id="contact">
+    <div class="contact-container fade-in">
+        <div class="section-center">
+            <span class="section-label">Contact</span>
+            <h2 class="section-title">無料相談のお申し込み</h2>
+            <p class="section-subtitle">
+                現状の課題をヒアリングし、最適な支援内容をご提案します。<br>
+                お気軽にお問い合わせください。
+            </p>
+        </div>
+        <form action="https://formspree.io/f/xojknppw" method="POST" id="contactForm">
+            <div class="form-group">
+                <label for="name">お名前<span class="required">*</span></label>
+                <input type="text" id="name" name="お名前" required>
+            </div>
+            <div class="form-group">
+                <label for="company">会社名・店舗名<span class="required">*</span></label>
+                <input type="text" id="company" name="会社名・店舗名" required>
+            </div>
+            <div class="form-group">
+                <label for="email">メールアドレス<span class="required">*</span></label>
+                <input type="email" id="email" name="メールアドレス" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">電話番号</label>
+                <input type="tel" id="phone" name="電話番号">
+            </div>
+            <div class="form-group">
+                <label for="message">ご相談内容</label>
+                <textarea id="message" name="ご相談内容" placeholder="現状の課題や目標をお聞かせください"></textarea>
+            </div>
+            <button type="submit" class="submit-button" id="submitButton">無料相談を申し込む</button>
+            <div id="formStatus"></div>
+        </form>
+        <div class="privacy-notice">
+            <strong>個人情報の取り扱いについて</strong><br>
+            ご入力いただいた個人情報は、お問い合わせへの回答およびサービスに関するご連絡のみを目的として利用いたします。ご本人の同意なく、第三者への提供・開示は行いません。
+        </div>
+        <div class="contact-next-steps">
+            <h4>お申し込み後の流れ</h4>
+            <div class="next-steps-list">
+                <div class="next-step-item">
+                    <div class="next-step-num">1</div>
+                    <div class="next-step-text"><strong>担当より2営業日以内にご連絡</strong>　ご希望の日時でオンライン or 対面でのヒアリングをご案内します。</div>
+                </div>
+                <div class="next-step-item">
+                    <div class="next-step-num">2</div>
+                    <div class="next-step-text"><strong>無料ヒアリング（約30〜45分）</strong>　現状の課題・ターゲット国籍・集客目標を整理し、最適なプランをご提案します。</div>
+                </div>
+                <div class="next-step-item">
+                    <div class="next-step-num">3</div>
+                    <div class="next-step-text"><strong>ご納得いただければ運用開始</strong>　無理な勧誘は一切ありません。ご検討の時間も十分に取っていただけます。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Company -->
+<section class="section company-section" id="company">
+    <div class="container fade-in">
+        <div class="section-center">
+            <span class="section-label">Company</span>
+            <h2 class="section-title">会社概要</h2>
+        </div>
+        <table class="company-table">
+            <tbody>
+                <tr><th>サービス名</th><td>Seron（セロン）</td></tr>
+                <tr><th>事業内容</th><td>インバウンド向け集客改善コンサルティング・多言語レビュー資産化支援・MEO運用/対策・OTA運用/構築・SNSマーケティング支援</td></tr>
+                <tr><th>対応エリア</th><td>東京都・大阪府・京都府（その他エリアはご相談ください）</td></tr>
+                <tr><th>所在地</th><td>〒541-0055 大阪府大阪市中央区船場中央２丁目３−６</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <div class="footer-logo">Seron</div>
+                <p class="footer-tagline">インバウンド特化 外国人集客プラットフォーム</p>
+                <p class="footer-desc">外国人の声×多言語レビューで、外国人観光客に選ばれる仕組みをつくります。</p>
+            </div>
+            <div class="footer-column">
+                <h4>サービス</h4>
+                <ul class="footer-links">
+                    <li><a href="#about">Seronとは</a></li>
+                    <li><a href="#flow">仕組み・流れ</a></li>
+                    <li><a href="#trust">実績</a></li>
+                    <li><a href="#comparison">他社比較</a></li>
+                    <li><a href="#company">会社概要</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>お問い合わせ</h4>
+                <ul class="footer-links">
+                    <li><a href="#faq">よくある質問</a></li>
+                </ul>
+                <a href="#contact" class="footer-cta-btn">無料相談を申し込む</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Seron. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="privacy-policy.html">個人情報保護方針</a>
+                <a href="terms.html">利用規約</a>
+                <a href="tokushoho.html">特定商取引法に基づく表記</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Header scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+    document.querySelectorAll('.mobile-nav-link, .mobile-cta').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // Fade in observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // FAQ toggle
+    function toggleFaq(button) {
+        const item = button.closest('.faq-item');
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+    }
+
+    // Form submission
+    const form = document.getElementById('contactForm');
+    const submitButton = document.getElementById('submitButton');
+    const formStatus = document.getElementById('formStatus');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        submitButton.disabled = true;
+        submitButton.textContent = '送信中...';
+        formStatus.className = '';
+        formStatus.style.display = 'none';
+        try {
+            const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+            if (res.ok) {
+                formStatus.className = 'success';
+                formStatus.textContent = 'お問い合わせありがとうございます。2営業日以内にご連絡いたします。';
+                formStatus.style.display = 'block';
+                form.reset();
+            } else {
+                throw new Error();
+            }
+        } catch {
+            formStatus.className = 'error';
+            formStatus.textContent = '送信に失敗しました。お手数ですが、もう一度お試しください。';
+            formStatus.style.display = 'block';
+        }
+        submitButton.disabled = false;
+        submitButton.textContent = '無料相談を申し込む';
+    });
+</script>
+
+</body>
+</html>
