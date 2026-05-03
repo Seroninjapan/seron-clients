@@ -1578,7 +1578,7 @@ function closeDiag(){
 // Close on Escape key
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDiag();});
 
-const GAS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbz85_n02g9MekT_ua2JnsFqRIIaefFbZH7TqS-DKBUoBKMeoYrkdRxllQQvbrprxrPVQA/exec';
+const GAS_WEBHOOK = 'https://script.google.com/macros/s/AKfycby2-Io0ImgdZMBehx6g52k58E_wWsa3GpHoYns_Igbbhl8GJX8izBWXqF0fwm9aioLGvw/exec';
 
 const dqs=[
   {t:"Googleマップで「（業種）＋エリア名」で検索した時、あなたの店は何位ですか？",c:["上位1〜3位に表示されている","4〜10位に表示されている","11位以下に表示されている","確認したことがない／分からない"],s:[4,3,1,0]},
@@ -1691,8 +1691,22 @@ async function sendDiagReport(){
   }
   msg.textContent='送信中...';msg.style.color='var(--text-muted)';
   const score=document.getElementById('drScore').textContent.replace('点','');
+
   try{
-    await fetch(GAS_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,storeName,type:dcurType,score}),mode:'no-cors'});
+    // フォームデータで送信（GAS CORSを回避）
+    const params = new URLSearchParams();
+    params.append('email', email);
+    params.append('storeName', storeName);
+    params.append('type', dcurType);
+    params.append('score', score);
+
+    await fetch(GAS_WEBHOOK, {
+      method: 'POST',
+      body: params,
+      mode: 'no-cors'
+    });
+
+    // no-corsのためレスポンスは読めないが送信は成功している
     document.getElementById('diagEmailBox').innerHTML=`
       <div style="padding:1rem 0;text-align:center">
         <div style="font-size:2rem;margin-bottom:.75rem">✉️</div>
