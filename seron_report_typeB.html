@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seron 診断レポート — タイプ B</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --p:#0B5E4F;--pd:#073D33;--acc:#C9A84C;
+  --bg:#F7F7F4;--white:#fff;--border:#E4E2DC;
+  --txt:#2c2c2c;--muted:#6b6b6b;--type:#e65100;
+}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;min-height:100vh}
+.wrap{max-width:800px;margin:0 auto;padding:40px 24px 64px}
+
+/* ── Header ── */
+.header{
+  background:var(--pd);
+  border-radius:20px;
+  padding:40px 44px 36px;
+  margin-bottom:32px;
+  position:relative;
+  overflow:hidden;
+}
+.header::before{
+  content:'';position:absolute;
+  top:-60px;right:-60px;width:220px;height:220px;
+  background:rgba(201,168,76,.08);border-radius:50%;
+}
+.header::after{
+  content:'';position:absolute;
+  bottom:-40px;left:40px;width:140px;height:140px;
+  background:rgba(255,255,255,.03);border-radius:50%;
+}
+.header-top{display:flex;align-items:center;gap:10px;margin-bottom:20px;position:relative;z-index:1}
+.type-badge{
+  background:var(--type);color:#fff;
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:900;
+  letter-spacing:.1em;padding:5px 14px;border-radius:50px;
+}
+.score-badge{
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);
+  font-size:11px;padding:5px 12px;border-radius:50px;
+  border:1px solid rgba(255,255,255,.15);
+}
+.header-headline{
+  font-family:'Outfit',sans-serif;
+  font-size:32px;font-weight:900;
+  color:#fff;line-height:1.2;
+  margin-bottom:10px;position:relative;z-index:1;
+}
+.header-sub{
+  font-size:13px;color:rgba(255,255,255,.55);
+  position:relative;z-index:1;
+}
+.header-accent-line{
+  width:48px;height:3px;
+  background:var(--acc);border-radius:2px;
+  margin:16px 0;position:relative;z-index:1;
+}
+
+/* ── Section ── */
+.section{margin-bottom:28px}
+.section-label{
+  font-family:'Outfit',sans-serif;
+  font-size:10px;font-weight:900;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--acc);margin-bottom:8px;
+}
+.section-title{
+  font-family:'Outfit',sans-serif;
+  font-size:16px;font-weight:900;
+  color:var(--pd);margin-bottom:14px;
+  padding-bottom:10px;
+  border-bottom:1.5px solid var(--border);
+}
+
+/* ── Desc ── */
+.desc{
+  background:var(--white);
+  border-radius:14px;
+  padding:20px 22px;
+  font-size:14px;line-height:1.9;color:var(--txt);
+  border-left:4px solid var(--p);
+  box-shadow:0 1px 8px rgba(0,0,0,.04);
+}
+
+/* ── Situation ── */
+.situation{
+  background:#FFF5F5;
+  border:1.5px solid #FFCDD2;
+  border-radius:14px;
+  padding:18px 22px;
+}
+.situation-head{
+  font-size:10px;font-weight:700;
+  color:#c62828;letter-spacing:.15em;
+  text-transform:uppercase;margin-bottom:10px;
+}
+.situation ul{list-style:none}
+.situation ul li{
+  font-size:13.5px;color:#5a2020;
+  padding:4px 0 4px 20px;
+  position:relative;line-height:1.6;
+}
+.situation ul li::before{
+  content:'';position:absolute;left:4px;top:11px;
+  width:6px;height:6px;background:#e53935;border-radius:50%;
+}
+
+/* ── Issues ── */
+.issue-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px 20px;
+  margin-bottom:10px;
+  display:flex;gap:16px;
+  align-items:flex-start;
+  box-shadow:0 1px 6px rgba(0,0,0,.04);
+  transition:box-shadow .2s;
+}
+.issue-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.issue-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.issue-title{font-size:14px;font-weight:700;color:var(--pd);margin-bottom:6px}
+.issue-desc{font-size:13px;color:var(--muted);line-height:1.75}
+
+/* ── KPIs ── */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{
+  background:var(--white);
+  border-radius:14px;
+  padding:20px 16px;
+  text-align:center;
+  border:1px solid var(--border);
+  border-top:3px solid var(--p);
+  box-shadow:0 1px 6px rgba(0,0,0,.04);
+}
+.kpi-val{
+  font-family:'Outfit',sans-serif;
+  font-size:26px;font-weight:900;
+  color:var(--p);line-height:1;margin-bottom:8px;
+}
+.kpi-lbl{font-size:12px;color:var(--muted);line-height:1.55}
+
+/* ── Steps ── */
+.steps-box{
+  background:var(--pd);
+  border-radius:16px;
+  padding:24px 26px;
+}
+.steps-label{
+  font-size:10px;font-weight:700;
+  color:var(--acc);letter-spacing:.15em;
+  text-transform:uppercase;margin-bottom:14px;
+}
+.step{
+  display:flex;gap:14px;
+  align-items:flex-start;
+  margin-bottom:10px;
+}
+.step:last-child{margin-bottom:0}
+.step-num{
+  width:24px;height:24px;
+  background:var(--acc);border-radius:50%;
+  color:#fff;font-family:'Outfit',sans-serif;
+  font-size:11px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.step-text{font-size:13.5px;color:rgba(255,255,255,.8);line-height:1.7}
+
+/* ── Seron ── */
+.seron-box{
+  background:linear-gradient(135deg,var(--pd) 0%,#0e7a66 100%);
+  border-radius:16px;
+  padding:24px 26px;
+  position:relative;overflow:hidden;
+}
+.seron-box::after{
+  content:'';position:absolute;
+  top:-30px;right:-30px;width:100px;height:100px;
+  background:rgba(201,168,76,.1);border-radius:50%;
+}
+.seron-title{
+  font-family:'Outfit',sans-serif;
+  font-size:14px;font-weight:900;
+  color:#fff;margin-bottom:14px;
+  position:relative;z-index:1;
+}
+.seron-item{
+  display:flex;gap:12px;
+  align-items:flex-start;
+  margin-bottom:9px;
+  position:relative;z-index:1;
+}
+.seron-item:last-child{margin-bottom:0}
+.seron-dot{
+  width:20px;height:20px;
+  background:rgba(201,168,76,.2);
+  border:1.5px solid var(--acc);
+  border-radius:50%;color:var(--acc);
+  font-family:'Outfit',sans-serif;
+  font-size:9px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:2px;
+}
+.seron-item div:last-child{font-size:13.5px;color:rgba(255,255,255,.8);line-height:1.7}
+
+/* ── CTA ── */
+.cta-bar{
+  background:var(--acc);
+  border-radius:14px;
+  padding:18px 24px;
+  display:flex;align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.cta-text{font-size:14px;font-weight:700;color:#fff}
+.cta-btn{
+  background:#fff;color:var(--acc);
+  font-family:'Outfit',sans-serif;
+  font-size:12px;font-weight:800;
+  padding:9px 20px;border-radius:50px;
+  white-space:nowrap;text-decoration:none;
+}
+
+/* ── Footer ── */
+.footer{
+  margin-top:32px;
+  padding-top:16px;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;
+  align-items:center;
+}
+.footer-left{font-size:11px;color:#bbb}
+.footer-right{
+  font-family:'Outfit',sans-serif;
+  font-size:11px;font-weight:900;
+  color:var(--acc);
+}
+
+@media print{
+  body{background:#fff}
+  .wrap{padding:20px 16px}
+  .header{break-inside:avoid}
+  .issue-card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="header-top">
+      <span class="type-badge">タイプ B</span>
+      <span class="score-badge">診断スコア目安 30〜55点</span>
+    </div>
+    <div class="header-headline">来てくれているのに、<br>声を資産にできていない状態</div>
+    <div class="header-accent-line"></div>
+    <div class="header-sub">機会損失 — 最もコスパが悪い状態</div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Current Status</div>
+    <div class="section-title">現状の診断</div>
+    <div class="desc">外国人客は来店しているのに、その体験が多言語レビューとして積み上がっていません。来店数に対してレビュー取得率が極めて低く、放置するほど損失が拡大します。来てくれている外国人客を最大限に活用できていない状態です。</div>
+  </div>
+
+  <div class="section">
+    <div class="situation">
+      <div class="situation-head">診断された状態</div>
+      <ul><li>外国人客は月5組以上来店しているが外国語レビューが少ない</li><li>良い体験をした客の声がオンラインに残っていない</li><li>レビューが積まれないため検索順位の改善が遅い</li></ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Problem Analysis</div>
+    <div class="section-title">課題の詳細分析</div>
+    
+      <div class="issue-card">
+        <div class="issue-icon">🔄</div>
+        <div class="issue-body">
+          <div class="issue-title">レビュー取得率の低さ</div>
+          <div class="issue-desc">来店数に対してレビュー獲得率が低く、毎月機会を逃し続けている。来てくれる外国人客の体験が可視化されないまま消えていく。</div>
+        </div>
+      </div>
+      <div class="issue-card">
+        <div class="issue-icon">📈</div>
+        <div class="issue-body">
+          <div class="issue-title">好循環の欠如</div>
+          <div class="issue-desc">レビューが増えれば検索順位も上がり、さらに外国人客が増えるという好循環を設計できていない。機会を活かせていない状態。</div>
+        </div>
+      </div>
+      <div class="issue-card">
+        <div class="issue-icon">📝</div>
+        <div class="issue-body">
+          <div class="issue-title">声の資産化ゼロ</div>
+          <div class="issue-desc">来店客のリアルな声が多言語コンテンツに変換されていない。最も信頼性の高い口コミが埋もれたままになっている。</div>
+        </div>
+      </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Target KPIs</div>
+    <div class="section-title">Seronで達成できる目標値</div>
+    <div class="kpi-row"><div class="kpi"><div class="kpi-val">3倍+</div><div class="kpi-lbl">レビュー<br>取得率改善</div></div><div class="kpi"><div class="kpi-val">月5件+</div><div class="kpi-lbl">外国語<br>レビュー増加</div></div><div class="kpi"><div class="kpi-val">1.5倍</div><div class="kpi-lbl">来客数<br>増加目標</div></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Action Plan</div>
+    <div class="section-title">今すぐ取るべき5つの打ち手</div>
+    <div class="steps-box">
+      <div class="steps-label">Seron Action Plan</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">来店外国人に対してレビュー投稿を依頼する仕組みを整備</div></div><div class="step"><div class="step-num">2</div><div class="step-text">外国人モニターの体験をGBPへの外国語レビューとして投稿</div></div><div class="step"><div class="step-num">3</div><div class="step-text">フィードバック分析で何が外国人に刺さっているかを特定・強化</div></div><div class="step"><div class="step-num">4</div><div class="step-text">GBPへのレビュー蓄積による検索順位向上の好循環を設計</div></div><div class="step"><div class="step-num">5</div><div class="step-text">月次レポートでレビュー数・検索順位の変化を追跡</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Our Solution</div>
+    <div class="section-title">Seronが提供するソリューション</div>
+    <div class="seron-box">
+      <div class="seron-title">Seronがこの課題を解決します</div>
+      <div class="seron-item"><div class="seron-dot">1</div><div>来店外国人の体験を多言語レビューとして投稿支援</div></div><div class="seron-item"><div class="seron-dot">2</div><div>GBPへの外国語レビュー蓄積による好循環設計</div></div><div class="seron-item"><div class="seron-dot">3</div><div>フィードバック分析で接客・メニュー改善を月次で提案</div></div>
+    </div>
+  </div>
+
+  <div class="cta-bar">
+    <div class="cta-text">無料相談・POCのお申し込みはこちら</div>
+    <a class="cta-btn" href="https://seroninjapan.github.io/seron-clients/#contact">相談する →</a>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">Seron Inbound Diagnosis Report  |  © 2026 Seron. All rights reserved.</div>
+    <div class="footer-right">タイプ B</div>
+  </div>
+
+</div>
+</body>
+</html>

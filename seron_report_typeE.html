@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seron 診断レポート — タイプ E</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --p:#0B5E4F;--pd:#073D33;--acc:#C9A84C;
+  --bg:#F7F7F4;--white:#fff;--border:#E4E2DC;
+  --txt:#2c2c2c;--muted:#6b6b6b;--type:#6a1b9a;
+}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;min-height:100vh}
+.wrap{max-width:800px;margin:0 auto;padding:40px 24px 64px}
+
+/* ── Header ── */
+.header{
+  background:var(--pd);
+  border-radius:20px;
+  padding:40px 44px 36px;
+  margin-bottom:32px;
+  position:relative;
+  overflow:hidden;
+}
+.header::before{
+  content:'';position:absolute;
+  top:-60px;right:-60px;width:220px;height:220px;
+  background:rgba(201,168,76,.08);border-radius:50%;
+}
+.header::after{
+  content:'';position:absolute;
+  bottom:-40px;left:40px;width:140px;height:140px;
+  background:rgba(255,255,255,.03);border-radius:50%;
+}
+.header-top{display:flex;align-items:center;gap:10px;margin-bottom:20px;position:relative;z-index:1}
+.type-badge{
+  background:var(--type);color:#fff;
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:900;
+  letter-spacing:.1em;padding:5px 14px;border-radius:50px;
+}
+.score-badge{
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);
+  font-size:11px;padding:5px 12px;border-radius:50px;
+  border:1px solid rgba(255,255,255,.15);
+}
+.header-headline{
+  font-family:'Outfit',sans-serif;
+  font-size:32px;font-weight:900;
+  color:#fff;line-height:1.2;
+  margin-bottom:10px;position:relative;z-index:1;
+}
+.header-sub{
+  font-size:13px;color:rgba(255,255,255,.55);
+  position:relative;z-index:1;
+}
+.header-accent-line{
+  width:48px;height:3px;
+  background:var(--acc);border-radius:2px;
+  margin:16px 0;position:relative;z-index:1;
+}
+
+/* ── Section ── */
+.section{margin-bottom:28px}
+.section-label{
+  font-family:'Outfit',sans-serif;
+  font-size:10px;font-weight:900;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--acc);margin-bottom:8px;
+}
+.section-title{
+  font-family:'Outfit',sans-serif;
+  font-size:16px;font-weight:900;
+  color:var(--pd);margin-bottom:14px;
+  padding-bottom:10px;
+  border-bottom:1.5px solid var(--border);
+}
+
+/* ── Desc ── */
+.desc{
+  background:var(--white);
+  border-radius:14px;
+  padding:20px 22px;
+  font-size:14px;line-height:1.9;color:var(--txt);
+  border-left:4px solid var(--p);
+  box-shadow:0 1px 8px rgba(0,0,0,.04);
+}
+
+/* ── Situation ── */
+.situation{
+  background:#FFF5F5;
+  border:1.5px solid #FFCDD2;
+  border-radius:14px;
+  padding:18px 22px;
+}
+.situation-head{
+  font-size:10px;font-weight:700;
+  color:#c62828;letter-spacing:.15em;
+  text-transform:uppercase;margin-bottom:10px;
+}
+.situation ul{list-style:none}
+.situation ul li{
+  font-size:13.5px;color:#5a2020;
+  padding:4px 0 4px 20px;
+  position:relative;line-height:1.6;
+}
+.situation ul li::before{
+  content:'';position:absolute;left:4px;top:11px;
+  width:6px;height:6px;background:#e53935;border-radius:50%;
+}
+
+/* ── Issues ── */
+.issue-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px 20px;
+  margin-bottom:10px;
+  display:flex;gap:16px;
+  align-items:flex-start;
+  box-shadow:0 1px 6px rgba(0,0,0,.04);
+  transition:box-shadow .2s;
+}
+.issue-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.issue-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.issue-title{font-size:14px;font-weight:700;color:var(--pd);margin-bottom:6px}
+.issue-desc{font-size:13px;color:var(--muted);line-height:1.75}
+
+/* ── KPIs ── */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{
+  background:var(--white);
+  border-radius:14px;
+  padding:20px 16px;
+  text-align:center;
+  border:1px solid var(--border);
+  border-top:3px solid var(--p);
+  box-shadow:0 1px 6px rgba(0,0,0,.04);
+}
+.kpi-val{
+  font-family:'Outfit',sans-serif;
+  font-size:26px;font-weight:900;
+  color:var(--p);line-height:1;margin-bottom:8px;
+}
+.kpi-lbl{font-size:12px;color:var(--muted);line-height:1.55}
+
+/* ── Steps ── */
+.steps-box{
+  background:var(--pd);
+  border-radius:16px;
+  padding:24px 26px;
+}
+.steps-label{
+  font-size:10px;font-weight:700;
+  color:var(--acc);letter-spacing:.15em;
+  text-transform:uppercase;margin-bottom:14px;
+}
+.step{
+  display:flex;gap:14px;
+  align-items:flex-start;
+  margin-bottom:10px;
+}
+.step:last-child{margin-bottom:0}
+.step-num{
+  width:24px;height:24px;
+  background:var(--acc);border-radius:50%;
+  color:#fff;font-family:'Outfit',sans-serif;
+  font-size:11px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.step-text{font-size:13.5px;color:rgba(255,255,255,.8);line-height:1.7}
+
+/* ── Seron ── */
+.seron-box{
+  background:linear-gradient(135deg,var(--pd) 0%,#0e7a66 100%);
+  border-radius:16px;
+  padding:24px 26px;
+  position:relative;overflow:hidden;
+}
+.seron-box::after{
+  content:'';position:absolute;
+  top:-30px;right:-30px;width:100px;height:100px;
+  background:rgba(201,168,76,.1);border-radius:50%;
+}
+.seron-title{
+  font-family:'Outfit',sans-serif;
+  font-size:14px;font-weight:900;
+  color:#fff;margin-bottom:14px;
+  position:relative;z-index:1;
+}
+.seron-item{
+  display:flex;gap:12px;
+  align-items:flex-start;
+  margin-bottom:9px;
+  position:relative;z-index:1;
+}
+.seron-item:last-child{margin-bottom:0}
+.seron-dot{
+  width:20px;height:20px;
+  background:rgba(201,168,76,.2);
+  border:1.5px solid var(--acc);
+  border-radius:50%;color:var(--acc);
+  font-family:'Outfit',sans-serif;
+  font-size:9px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:2px;
+}
+.seron-item div:last-child{font-size:13.5px;color:rgba(255,255,255,.8);line-height:1.7}
+
+/* ── CTA ── */
+.cta-bar{
+  background:var(--acc);
+  border-radius:14px;
+  padding:18px 24px;
+  display:flex;align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.cta-text{font-size:14px;font-weight:700;color:#fff}
+.cta-btn{
+  background:#fff;color:var(--acc);
+  font-family:'Outfit',sans-serif;
+  font-size:12px;font-weight:800;
+  padding:9px 20px;border-radius:50px;
+  white-space:nowrap;text-decoration:none;
+}
+
+/* ── Footer ── */
+.footer{
+  margin-top:32px;
+  padding-top:16px;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;
+  align-items:center;
+}
+.footer-left{font-size:11px;color:#bbb}
+.footer-right{
+  font-family:'Outfit',sans-serif;
+  font-size:11px;font-weight:900;
+  color:var(--acc);
+}
+
+@media print{
+  body{background:#fff}
+  .wrap{padding:20px 16px}
+  .header{break-inside:avoid}
+  .issue-card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="header-top">
+      <span class="type-badge">タイプ E</span>
+      <span class="score-badge">診断スコア目安 25〜50点</span>
+    </div>
+    <div class="header-headline">やりたい気持ちはある。<br>でも手が回らない状態</div>
+    <div class="header-accent-line"></div>
+    <div class="header-sub">リソース不足 — 意識はあるが実行できない</div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Current Status</div>
+    <div class="section-title">現状の診断</div>
+    <div class="desc">インバウンド対策の重要性は理解しているが、日常業務の中で対応できていません。意識はあるのに手が動かず、気づけば何ヶ月も経過しているパターンです。外注化して仕組みで解決するのが合理的です。</div>
+  </div>
+
+  <div class="section">
+    <div class="situation">
+      <div class="situation-head">診断された状態</div>
+      <ul><li>インバウンド対策の重要性は理解しているが後回しになっている</li><li>担当者が兼任または不在で、継続的な対応ができていない</li><li>ノウハウはなく、何から始めるべきか分からないまま</li></ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Problem Analysis</div>
+    <div class="section-title">課題の詳細分析</div>
+    
+      <div class="issue-card">
+        <div class="issue-icon">⏰</div>
+        <div class="issue-body">
+          <div class="issue-title">時間・人材の不足</div>
+          <div class="issue-desc">日常業務が優先され、インバウンド対策は常に後回し。いつかやろうと思いながら時間が過ぎていく。</div>
+        </div>
+      </div>
+      <div class="issue-card">
+        <div class="issue-icon">⚙️</div>
+        <div class="issue-body">
+          <div class="issue-title">仕組みの欠如</div>
+          <div class="issue-desc">一時的に対応しても継続できない。定期的にレビューを獲得する仕組みがなく、単発の努力が積み上がらない。</div>
+        </div>
+      </div>
+      <div class="issue-card">
+        <div class="issue-icon">💡</div>
+        <div class="issue-body">
+          <div class="issue-title">ノウハウの不足</div>
+          <div class="issue-desc">何から手をつけるべきかの優先順位が整理されておらず、手が止まったまま。どの施策が効果的か判断できない。</div>
+        </div>
+      </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Target KPIs</div>
+    <div class="section-title">Seronで達成できる目標値</div>
+    <div class="kpi-row"><div class="kpi"><div class="kpi-val">月1回</div><div class="kpi-lbl">モニター<br>派遣頻度</div></div><div class="kpi"><div class="kpi-val">工数ゼロ</div><div class="kpi-lbl">担当者の<br>追加工数</div></div><div class="kpi"><div class="kpi-val">月次</div><div class="kpi-lbl">レポート<br>サイクル</div></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Action Plan</div>
+    <div class="section-title">今すぐ取るべき5つの打ち手</div>
+    <div class="steps-box">
+      <div class="steps-label">Seron Action Plan</div>
+      <div class="step"><div class="step-num">1</div><div class="step-text">Seronに外注することで担当者ゼロでも月次のレビュー蓄積を実現</div></div><div class="step"><div class="step-num">2</div><div class="step-text">まず1ヶ月のPOCで効果を確認してから継続判断する</div></div><div class="step"><div class="step-num">3</div><div class="step-text">月次レポートで状況を可視化し担当者の工数をほぼゼロに</div></div><div class="step"><div class="step-num">4</div><div class="step-text">戦略設計・モニター派遣・投稿・レポートをSeronが一括担当</div></div><div class="step"><div class="step-num">5</div><div class="step-text">成果が出たタイミングで社内リソースの配分を見直す</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Our Solution</div>
+    <div class="section-title">Seronが提供するソリューション</div>
+    <div class="seron-box">
+      <div class="seron-title">Seronがこの課題を解決します</div>
+      <div class="seron-item"><div class="seron-dot">1</div><div>月1回のモニター派遣で運用工数ゼロのレビュー蓄積を構築</div></div><div class="seron-item"><div class="seron-dot">2</div><div>月次レポートで状況を可視化し担当者工数をほぼゼロに</div></div><div class="seron-item"><div class="seron-dot">3</div><div>戦略設計から投稿まで一括でSeronが対応</div></div>
+    </div>
+  </div>
+
+  <div class="cta-bar">
+    <div class="cta-text">無料相談・POCのお申し込みはこちら</div>
+    <a class="cta-btn" href="https://seroninjapan.github.io/seron-clients/#contact">相談する →</a>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">Seron Inbound Diagnosis Report  |  © 2026 Seron. All rights reserved.</div>
+    <div class="footer-right">タイプ E</div>
+  </div>
+
+</div>
+</body>
+</html>
