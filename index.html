@@ -41,12 +41,12 @@
 
         /* ===== Utility ===== */
         .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
-        .section { padding: 6rem 0; }
+        .section { padding: 4rem 0; }
         .section-label { font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
         .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; color: var(--text-dark); line-height: 1.35; margin-bottom: 1rem; }
         .section-subtitle { font-size: 1.05rem; color: var(--text-muted); max-width: 640px; line-height: 1.85; }
         .section-center { text-align: center; }
-        .section-center .section-subtitle { margin: 0 auto 3rem; }
+        .section-center .section-subtitle { margin: 0 auto 2rem; }
         .section-center .section-label { display: block; }
 
         /* ===== Fade In ===== */
@@ -528,6 +528,24 @@
         .pricing-cta .cta-primary { width: 100%; justify-content: center; font-size: 1rem; padding: 1.1rem; border: none; border-radius: 50px; }
         .pricing-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem; }
 
+        /* ===== Diagnosis Modal ===== */
+        @keyframes diagPulse {
+            0%   { transform: scale(1);   opacity: .6; }
+            70%  { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        @keyframes shimmer {
+            0%   { transform: translateX(-100%); }
+            60%  { transform: translateX(200%); }
+            100% { transform: translateX(200%); }
+        }
+        @keyframes diagDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: .4; transform: scale(.7); }
+        }
+        #diagModal { animation: modalFadeIn .25s ease; }
+        @keyframes modalFadeIn { from { opacity:0 } to { opacity:1 } }
+
         /* ===== Responsive ===== */
         @media (max-width: 1024px) {
             .definition-grid, .trust-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -628,7 +646,8 @@
             <a href="#about" class="nav-link">サービス</a>
             <a href="#flow" class="nav-link">仕組み</a>
             <a href="#trust" class="nav-link">実績</a>
-            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#diagnosis" class="nav-link">診断</a>
+                <a href="#faq" class="nav-link">FAQ</a>
             <button class="header-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">無料相談 →</button>
         </nav>
         <button class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
@@ -1164,6 +1183,85 @@
     </div>
 </section>
 
+<!-- Diagnosis Modal -->
+<div id="diagModal" style="display:none;position:fixed;inset:0;z-index:9000;overflow-y:auto">
+  <div id="diagBackdrop" onclick="closeDiag()" style="position:fixed;inset:0;background:rgba(7,61,51,0.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)"></div>
+  <div style="position:relative;z-index:9001;min-height:100%;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem 4rem">
+    <div style="background:#fff;border-radius:24px;width:100%;max-width:700px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.3);margin-top:3rem">
+      <div style="background:linear-gradient(135deg,var(--primary-dark),var(--primary));padding:2rem 2.5rem 1.75rem;position:relative">
+        <button onclick="closeDiag()" style="position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,.15);border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.28)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">✕</button>
+        <div style="font-family:Outfit,sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Diagnosis</div>
+        <div style="font-family:Outfit,sans-serif;font-size:1.5rem;font-weight:900;color:#fff;line-height:1.3;margin-bottom:.4rem">インバウンド対応度 無料診断</div>
+        <div style="font-size:.86rem;color:rgba(255,255,255,.58)">7つの質問に答えるだけ。あなたの店の課題と打ち手が分かります。</div>
+      </div>
+      <div style="padding:2rem 2.5rem 2.5rem">
+        <div id="diagMain">
+          <div style="display:flex;justify-content:space-between;margin-bottom:.4rem">
+            <span style="font-size:.76rem;color:var(--text-muted)" id="dplbl">Q1 / 7</span>
+            <span style="font-size:.76rem;color:var(--text-muted)" id="dppct">14%</span>
+          </div>
+          <div style="height:5px;background:var(--border-light);border-radius:3px;margin-bottom:1.5rem;overflow:hidden">
+            <div id="dpfill" style="height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:3px;transition:width .4s ease;width:14%"></div>
+          </div>
+          <div id="dqnum" style="font-family:Outfit,sans-serif;font-size:.67rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.45rem">Question 01</div>
+          <div id="dqtext" style="font-size:1rem;font-weight:700;color:var(--text-dark);line-height:1.6;margin-bottom:1.2rem"></div>
+          <div id="dcwrap" style="display:flex;flex-direction:column;gap:.5rem"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem">
+            <button id="dbbk" onclick="diagBack()" style="background:none;border:1.5px solid var(--border-light);color:var(--text-muted);padding:.55rem 1.3rem;border-radius:50px;cursor:pointer;font-size:.84rem;font-weight:600">← 戻る</button>
+            <button id="dbnx" onclick="diagNext()" disabled style="background:var(--primary);color:#fff;border:none;padding:.6rem 1.75rem;border-radius:50px;cursor:pointer;font-size:.88rem;font-weight:700;opacity:.4;transition:opacity .2s">次へ →</button>
+          </div>
+        </div>
+        <div id="diagResult" style="display:none">
+          <div style="text-align:center;padding:.75rem 0">
+            <div id="drBadge" style="display:inline-block;background:rgba(11,94,79,.1);border:1px solid rgba(11,94,79,.25);color:var(--primary-dark);padding:.3rem 1rem;border-radius:50px;font-size:.75rem;font-weight:700;margin-bottom:.75rem"></div>
+            <div id="drType" style="font-family:Outfit,sans-serif;font-size:clamp(1rem,2.5vw,1.45rem);font-weight:900;color:var(--text-dark);margin-bottom:.5rem;line-height:1.3"></div>
+            <div id="drScore" style="font-family:Outfit,sans-serif;font-size:2.8rem;font-weight:900;color:var(--primary);line-height:1"></div>
+            <div style="font-size:.78rem;color:var(--text-muted);margin-top:.2rem">インバウンド対応スコア（100点満点）</div>
+            <div id="drDesc" style="font-size:.87rem;color:var(--text-body);line-height:1.85;margin:1rem 0;padding:1rem 1.2rem;background:var(--bg-cream);border-radius:10px;border-left:3px solid var(--primary);text-align:left"></div>
+          </div>
+          <div id="drIssues" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin:.75rem 0"></div>
+          <div style="background:linear-gradient(135deg,var(--primary-dark),var(--primary));border-radius:14px;padding:1.5rem;margin:1.25rem 0;color:#fff">
+            <div style="font-family:Outfit,sans-serif;font-size:.88rem;font-weight:800;margin-bottom:.85rem;opacity:.95">Seronがこの課題を解決します</div>
+            <div id="drSeronActs"></div>
+          </div>
+          <div id="diagEmailBox" style="background:#fff;border:1.5px solid var(--accent);border-radius:14px;padding:1.5rem;margin:1.25rem 0;text-align:center">
+            <div style="font-family:Outfit,sans-serif;font-size:.92rem;font-weight:900;color:var(--primary-dark);margin-bottom:.35rem">🛠️ あなたの課題への解決方法をまとめたレポートを受け取る</div>
+            <div style="font-size:.81rem;color:var(--text-muted);margin-bottom:.9rem;line-height:1.7">診断タイプに合わせた<strong>具体的な解決ステップ・優先アクション・KPI目標</strong>をメールでお送りします。</div>
+            <div style="display:flex;flex-direction:column;gap:.55rem;max-width:380px;margin:0 auto">
+              <input id="deStoreName" type="text" placeholder="店舗名・会社名" style="width:100%;padding:.75rem 1rem;border:1.5px solid var(--border-light);border-radius:8px;font-size:.88rem;font-family:Noto Sans JP,sans-serif;outline:none" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-light)'">
+              <input id="deEmail" type="email" placeholder="メールアドレス（必須）" style="width:100%;padding:.75rem 1rem;border:1.5px solid var(--border-light);border-radius:8px;font-size:.88rem;font-family:Noto Sans JP,sans-serif;outline:none" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-light)'">
+              <button onclick="sendDiagReport()" style="background:var(--accent);color:#fff;border:none;padding:.85rem;border-radius:8px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:Noto Sans JP,sans-serif">解決方法レポートを受け取る →</button>
+            </div>
+            <div id="diagEmailMsg" style="margin-top:.6rem;font-size:.78rem;color:var(--text-muted)"></div>
+          </div>
+          <div style="text-align:center;margin-top:.6rem">
+            <button onclick="diagReset()" style="background:none;border:none;color:var(--text-muted);font-size:.78rem;cursor:pointer;text-decoration:underline">もう一度診断する</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Diagnosis Button -->
+<div id="floatDiagWrap" style="position:fixed;bottom:1.75rem;right:1.75rem;z-index:8000">
+  <button onclick="openDiag()" style="background:linear-gradient(135deg,#073D33 0%,#0B5E4F 100%);border:none;border-radius:16px;cursor:pointer;padding:1rem 1.1rem 1rem 1rem;display:flex;align-items:center;gap:.85rem;box-shadow:0 8px 28px rgba(7,61,51,.5),0 2px 8px rgba(0,0,0,.15);transition:all .25s ease;position:relative;overflow:hidden"
+  onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 14px 36px rgba(7,61,51,.6),0 4px 12px rgba(0,0,0,.18)'"
+  onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 8px 28px rgba(7,61,51,.5),0 2px 8px rgba(0,0,0,.15)'">
+    <span style="position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.07) 50%,transparent 60%);animation:shimmer 3s infinite;pointer-events:none"></span>
+    <div style="width:42px;height:42px;flex-shrink:0;background:rgba(201,168,76,.18);border:1.5px solid rgba(201,168,76,.45);border-radius:10px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+    </div>
+    <div style="text-align:left;position:relative;z-index:1">
+      <div style="font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,168,76,.85);margin-bottom:.25rem;line-height:1">無料 診断</div>
+      <div style="font-size:.82rem;font-weight:800;color:#fff;line-height:1.35">まずはスコアで<br>あなたの店を確認</div>
+    </div>
+    <svg style="flex-shrink:0;opacity:.5;margin-left:.25rem;position:relative;z-index:1" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    <span style="position:absolute;top:8px;right:8px;width:7px;height:7px;background:#C9A84C;border-radius:50%;animation:diagDot 2s ease-in-out infinite;z-index:1"></span>
+  </button>
+</div>
+
+
 <!-- FAQ -->
 <section class="section faq-section" id="faq">
     <div class="container">
@@ -1450,6 +1548,148 @@
     heroSection.style.backgroundSize = 'cover';
     heroSection.style.backgroundPosition = 'center';
 
+// ── Diagnosis Modal ──────────────────────────────────────
+function openDiag(){
+  const m=document.getElementById('diagModal');
+  m.style.display='block';
+  document.body.style.overflow='hidden';
+  diagRender();
+}
+function closeDiag(){
+  document.getElementById('diagModal').style.display='none';
+  document.body.style.overflow='';
+}
+// Close on Escape key
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDiag();});
+
+const GAS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbz85_n02g9MekT_ua2JnsFqRIIaefFbZH7TqS-DKBUoBKMeoYrkdRxllQQvbrprxrPVQA/exec';
+
+const dqs=[
+  {t:"Googleマップで「（業種）＋エリア名」で検索した時、あなたの店は何位ですか？",c:["上位1〜3位に表示されている","4〜10位に表示されている","11位以下に表示されている","確認したことがない／分からない"],s:[4,3,1,0]},
+  {t:"Googleビジネスプロフィールに外国語（英語・中国語・韓国語等）のレビューは何件ありますか？",c:["20件以上ある","10〜19件ある","1〜9件ある","ほぼゼロ、またはまったくない"],s:[4,3,1,0]},
+  {t:"Googleの総合評価（★）は現在いくつですか？",c:["4.3以上","4.0〜4.2","3.5〜3.9","3.4以下、または把握していない"],s:[4,3,1,0]},
+  {t:"外国人のお客様は月にどのくらい来店していますか？",c:["月20組以上","月5〜19組","月1〜4組","ほぼゼロ"],s:[4,3,1,0]},
+  {t:"OTA（Klook・Airbnb体験・Viator等）への掲載状況は？",c:["複数のOTAに掲載していて予約も入っている","掲載はしているが予約はほとんどない","掲載を検討中","まったく対応していない"],s:[4,2,1,0]},
+  {t:"店舗の情報発信（SNS・HP等）は多言語で行っていますか？",c:["英語以外の言語（中国語・韓国語等）でも発信している","英語のみ対応している","日本語のみで発信している","SNS・HPともほぼ更新していない"],s:[4,3,1,0]},
+  {t:"インバウンド対策に使えるリソース（人・時間）はどのくらいありますか？",c:["専任担当またはそれに近い人員がいる","兼任でなんとか対応している","ほとんど手が回っていない","まったく手を付けられていない"],s:[4,2,1,0]}
+];
+
+const dtypes={
+  A:{badge:"タイプA：基盤ゼロ",type:'外国人の地図に、まだ存在していない状態',desc:"検索にも出ない、レビューもない、来店もない。外国人旅行者がGoogleで検索しても候補にすら上がらず、存在を知られていません。ただし、ここから始めれば最も大きな変化を生み出せるフェーズです。",issues:[{icon:"📍",lbl:"検索露出",txt:"検索で存在すら認識されていない。外国人には見えていない。",pct:10},{icon:"💬",lbl:"レビュー資産",txt:"外国語レビューがゼロ。信頼の根拠がまったくない。",pct:8},{icon:"🌐",lbl:"情報発信",txt:"多言語での情報がなく、発見される入口が閉じている。",pct:12}],actions:["在日外国人モニターを派遣し外国語レビューをゼロから構築","GBPのMEO対策と多言語プロフィール最適化","月次レポートで検索順位・レビュー増加を数値追跡"]},
+  B:{badge:"タイプB：機会損失",type:'来てくれているのに、声を資産にできていない状態',desc:"外国人客は来店しているのに、その体験が多言語レビューとして積み上がっていません。最もコスパが悪い状態です。",issues:[{icon:"🔄",lbl:"レビュー取得率",txt:"来店数に対してレビュー獲得率が低く機会を逃し続けている。",pct:20},{icon:"📈",lbl:"好循環設計",txt:"レビューが増えれば順位も上がるが、その仕組みがない。",pct:30},{icon:"📝",lbl:"声の資産化",txt:"来店客のリアルな声が多言語コンテンツに変換されていない。",pct:25}],actions:["来店外国人の体験を多言語レビューとして投稿支援","GBPへの外国語レビュー蓄積による検索順位向上の好循環設計","フィードバック分析で接客・メニュー改善を月次で提案"]},
+  C:{badge:"タイプC：選ばれていない",type:'見つかっているのに、クリックされていない状態',desc:"Googleでの検索順位は高いのに、外国人客の来店につながっていません。比較検討の段階で脱落しています。",issues:[{icon:"⭐",lbl:"外国語レビュー",txt:"外国語レビューが少なく、外国人が判断材料を持てない。",pct:25},{icon:"🎯",lbl:"訴求精度",txt:"外国人に刺さるコンテンツ・言語・訴求内容が最適化されていない。",pct:35},{icon:"🌍",lbl:"情報の信頼性",txt:"外国語での情報が少なく検討段階で離脱されている。",pct:30}],actions:["外国人目線のフィードバックで「刺さるポイント」を特定","多言語レビューの質・量を継続的に向上","国籍別に訴求する情報の整備支援"]},
+  D:{badge:"タイプD：入口が閉じている",type:'日本語の壁が、外国人を遮断している状態',desc:"OTA未対応かつ多言語発信がない状態です。外国人旅行者が旅マエに情報収集する際の入口がほぼ閉じています。",issues:[{icon:"🚪",lbl:"予約導線",txt:"OTA未対応のため外国人が予約できる入口がない。",pct:15},{icon:"📣",lbl:"多言語発信",txt:"SNS・HPが日本語のみで旅マエの情報収集に届かない。",pct:20},{icon:"🔍",lbl:"検索流入",txt:"外国人が使う検索ワードへの対応が不十分。",pct:25}],actions:["OTA（Klook・Viator等）への掲載設定と予約導線構築","英語・中国語・韓国語での多言語情報発信支援","外国人向けGBP最適化と多言語レビュー投稿"]},
+  E:{badge:"タイプE：リソース不足",type:'やりたい気持ちはある。でも手が回らない状態',desc:"インバウンド対策の重要性は理解しているが、日常業務の中で対応できていません。外注化して仕組みで解決するのが合理的です。",issues:[{icon:"⏰",lbl:"対応リソース",txt:"担当者の時間が足りず対策が後回しになり続けている。",pct:15},{icon:"📋",lbl:"仕組みの欠如",txt:"定期的にレビューを獲得する仕組みが存在しない。",pct:20},{icon:"💡",lbl:"優先順位",txt:"何から始めるべきかが整理されておらず手が止まっている。",pct:30}],actions:["月1回のモニター派遣で運用工数ゼロのレビュー蓄積を構築","月次レポートで状況を可視化し担当者工数をほぼゼロに","戦略設計から投稿まで一括でSeronが対応"]},
+  F:{badge:"タイプF：露出チャネル全滅",type:'外国人の旅に、あなたの店は登場しない。',desc:"検索・OTA・多言語SNSのすべてが未対応です。外国人旅行者が使うあらゆるチャネルに露出できておらず、最も深刻な状態のひとつです。",issues:[{icon:"📡",lbl:"検索チャネル",txt:"Googleマップでの露出がほぼゼロ。発見されない状態。",pct:10},{icon:"🗺️",lbl:"OTAチャネル",txt:"旅行者が使うOTAにまったく掲載されていない。",pct:8},{icon:"📱",lbl:"SNSチャネル",txt:"多言語SNSでの発信がなく旅マエ需要を取れていない。",pct:12}],actions:["GBP・OTA・多言語SNSの優先順位を整理し段階的に開通","外国語レビューをゼロから構築するモニター派遣","全チャネルの戦略設計からSeronが一括サポート"]},
+  G:{badge:"タイプG：言語の壁",type:'頑張っているのに、外国人には伝わっていない。',desc:"情報発信はしているが日本語のみです。外国人には「読めない店」として認識されており、言語の壁で来店につながっていない状態です。",issues:[{icon:"🔤",lbl:"言語対応",txt:"日本語のみの発信で外国人が内容を理解できない。",pct:20},{icon:"💬",lbl:"外国語レビュー",txt:"外国語レビューが少なく外国人の判断材料がない。",pct:25},{icon:"🌏",lbl:"多言語コンテンツ",txt:"メニュー・SNS・GBPの多言語化が手つかず。",pct:30}],actions:["外国人モニターによる多言語レビューの投稿支援","GBP・SNS・メニューの多言語コンテンツ整備","国籍別に刺さる情報設計と継続的な多言語発信支援"]},
+  H:{badge:"タイプH：評価が足を引っ張っている",type:'悪い口コミが、せっかくの集客を潰している。',desc:"来店はそこそこあるが、星評価が低いために新規の外国人客の来店を阻んでいます。ポジティブなレビューの蓄積が急務です。",issues:[{icon:"⭐",lbl:"評価スコア",txt:"低い星評価が外国人客の来店判断に悪影響を与えている。",pct:15},{icon:"😞",lbl:"ネガティブレビュー",txt:"低評価レビューが積み上がり新規客を遠ざけている。",pct:20},{icon:"📊",lbl:"レビューバランス",txt:"良い体験をしている客の声が可視化されていない。",pct:25}],actions:["質の高い外国人モニター体験でポジティブレビューを積み上げ","外国人フィードバックをもとにした接客・サービス改善","GBPの評価スコア改善と多言語レビューの戦略的蓄積"]},
+  I:{badge:"タイプI：始められないまま",type:'毎月、外国人客を取りこぼし続けている。',desc:"来店もほぼなく、リソースもなく、検索にも出ない。最も対策が手つかずの状態です。小さく・確実に・仕組みとして始めることが最も重要です。",issues:[{icon:"🕰️",lbl:"時間の経過",txt:"対策を始められないまま機会損失が積み上がっている。",pct:10},{icon:"🔋",lbl:"リソース",txt:"人も時間も足りず、何から手をつけるか分からない。",pct:12},{icon:"📉",lbl:"全体スコア",txt:"インバウンド対応がほぼすべての面で未対応の状態。",pct:8}],actions:["月1回のモニター派遣から最小工数で始められる仕組みを構築","戦略設計・実行・レポートをSeronが一括で担当","まず1ヶ月のPOCで効果を確認してから判断できる"]},
+  J:{badge:"タイプJ：あと一歩",type:'仕組みはある。あとは磨き続けるだけ。',desc:"インバウンド対応の基盤は整っています。次のステップは継続的な蓄積と多様性の向上です。ここからが本当の差別化のフェーズです。",issues:[{icon:"📈",lbl:"継続的蓄積",txt:"レビューは継続的な増加が検索順位維持に必要。",pct:65},{icon:"🌏",lbl:"国籍の多様性",txt:"特定国籍に偏ったレビュー構成になっている可能性。",pct:55},{icon:"🎯",lbl:"精度向上",txt:"レビューの内容・質をさらに高めて転換率を上げる余地がある。",pct:70}],actions:["継続的モニター派遣で多様な国籍・言語のレビューを蓄積","外国人フィードバックをもとにしたサービス改善提案","GBP・OTAの最適化で上位表示を維持・強化"]},
+};
+
+let dcur=0,dans=new Array(7).fill(-1),dcurType='';
+
+function diagRender(){
+  const q=dqs[dcur];
+  document.getElementById('dqnum').textContent='Question 0'+(dcur+1);
+  document.getElementById('dqtext').textContent=q.t;
+  document.getElementById('dplbl').textContent='Q'+(dcur+1)+' / 7';
+  document.getElementById('dpfill').style.width=((dcur+1)/7*100)+'%';
+  document.getElementById('dbbk').style.opacity=dcur===0?'0':'1';
+  document.getElementById('dbbk').style.pointerEvents=dcur===0?'none':'auto';
+  const w=document.getElementById('dcwrap');w.innerHTML='';
+  q.c.forEach((c,i)=>{
+    const d=document.createElement('div');
+    d.style.cssText='display:flex;align-items:center;gap:.8rem;padding:.9rem 1.1rem;border:1.5px solid var(--border-light);border-radius:10px;cursor:pointer;transition:all .2s;background:#fff';
+    const sel=dans[dcur]===i;
+    d.innerHTML=`<div style="width:17px;height:17px;border-radius:50%;border:2px solid ${sel?'var(--primary)':'var(--border-light)'};flex-shrink:0;display:flex;align-items:center;justify-content:center;background:${sel?'var(--primary)':'transparent'}"><div style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:${sel?1:0}"></div></div><div style="font-size:.9rem;color:var(--text-body);line-height:1.5">${c}</div>`;
+    if(sel){d.style.borderColor='var(--primary)';d.style.background='rgba(11,94,79,.07)';}
+    d.onclick=()=>diagSel(i);
+    w.appendChild(d);
+  });
+  const nx=document.getElementById('dbnx');
+  nx.disabled=dans[dcur]===-1;
+  nx.style.opacity=dans[dcur]===-1?'.4':'1';
+  document.getElementById('dbnx').textContent=dcur===6?'診断結果を見る →':'次へ →';
+}
+
+function diagSel(i){dans[dcur]=i;diagRender();}
+function diagNext(){if(dans[dcur]===-1)return;if(dcur<6){dcur++;diagRender();}else diagShowResult();}
+function diagBack(){if(dcur>0){dcur--;diagRender();}}
+
+function diagReset(){
+  dcur=0;dans=new Array(7).fill(-1);dcurType='';
+  document.getElementById('diagMain').style.display='block';
+  document.getElementById('diagResult').style.display='none';
+  document.getElementById('diagEmailMsg').textContent='';
+  diagRender();
+}
+
+function diagGetType(a){
+  const q1=dqs[0].s[a[0]],q2=dqs[1].s[a[1]],q3=dqs[2].s[a[2]];
+  const q4=dqs[3].s[a[3]],q5=dqs[4].s[a[4]],q6=dqs[5].s[a[5]],q7=dqs[6].s[a[6]];
+  if(q3<=1&&q4>=2)return'H';
+  if(q1<=1&&q2<=1&&q4<=1&&q7<=1)return'I';
+  if(q1<=1&&q5===0&&q6<=1)return'F';
+  if(q1<=1&&q2<=1&&q4<=1)return'A';
+  if(q4>=3&&q2<=1)return'B';
+  if(q1>=3&&q4<=1&&q2<=2)return'C';
+  if(q5===0&&q6<=1)return'D';
+  if(q2<=1&&q6<=1&&q1>=2)return'G';
+  if(q7<=1&&q4<=1)return'E';
+  return'J';
+}
+
+function diagShowResult(){
+  const tot=dans.reduce((s,a,i)=>s+dqs[i].s[a],0);
+  const pct=Math.round(tot/28*100);
+  dcurType=diagGetType(dans);
+  const t=dtypes[dcurType];
+  document.getElementById('drBadge').textContent=t.badge;
+  document.getElementById('drType').textContent=t.type;
+  document.getElementById('drScore').textContent=pct+'点';
+  document.getElementById('drDesc').textContent=t.desc;
+  document.getElementById('drIssues').innerHTML=t.issues.map(i=>`
+    <div style="background:#fff;border:1px solid var(--border-light);border-radius:12px;padding:1.1rem">
+      <div style="font-size:1.3rem;margin-bottom:.4rem">${i.icon}</div>
+      <div style="font-size:.7rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem">${i.lbl}</div>
+      <div style="font-size:.84rem;color:var(--text-body);line-height:1.55">${i.txt}</div>
+      <div style="height:3px;border-radius:2px;margin-top:.65rem;background:var(--border-light)"><div style="height:100%;border-radius:2px;background:linear-gradient(90deg,var(--primary),var(--accent));width:${i.pct}%"></div></div>
+    </div>`).join('');
+  document.getElementById('drSeronActs').innerHTML=t.actions.map((a,i)=>`
+    <div style="display:flex;align-items:flex-start;gap:.7rem;font-size:.88rem;line-height:1.6;opacity:.9;margin-bottom:.55rem">
+      <div style="width:20px;height:20px;background:var(--accent);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:900;color:#fff;margin-top:.1rem">${i+1}</div>
+      <span>${a}</span>
+    </div>`).join('');
+  document.getElementById('diagMain').style.display='none';
+  document.getElementById('diagResult').style.display='block';
+}
+
+async function sendDiagReport(){
+  const email=document.getElementById('deEmail').value;
+  const storeName=document.getElementById('deStoreName').value;
+  const msg=document.getElementById('diagEmailMsg');
+  if(!email||!email.includes('@')){
+    msg.textContent='メールアドレスを正しく入力してください。';
+    msg.style.color='#e53935';return;
+  }
+  msg.textContent='送信中...';msg.style.color='var(--text-muted)';
+  const score=document.getElementById('drScore').textContent.replace('点','');
+  try{
+    await fetch(GAS_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,storeName,type:dcurType,score}),mode:'no-cors'});
+    document.getElementById('diagEmailBox').innerHTML=`
+      <div style="padding:1rem 0;text-align:center">
+        <div style="font-size:2rem;margin-bottom:.75rem">✉️</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:900;color:var(--primary-dark);margin-bottom:.5rem">レポートを送信しました</div>
+        <div style="font-size:.88rem;color:var(--text-muted);line-height:1.7">${email} にお送りしました。<br>届かない場合は迷惑メールフォルダをご確認ください。</div>
+      </div>`;
+  }catch(e){
+    msg.textContent='送信に失敗しました。しばらくしてから再度お試しください。';
+    msg.style.color='#e53935';
+  }
+}
+
+// ── End Diagnosis ──────────────────────────────────────────
 </script>
 
 </body>
