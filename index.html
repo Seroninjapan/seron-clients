@@ -410,6 +410,48 @@
         .mid-cta-btn { background: var(--accent); color: white; padding: 0.9rem 2rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer; white-space: nowrap; transition: all 0.3s; box-shadow: 0 4px 16px rgba(201,168,76,0.3); display: inline-flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
         .mid-cta-btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
         @media (max-width: 640px) { .mid-cta-inner { flex-direction: column; text-align: center; } }
+
+        /* ===== Floating banner mobile ===== */
+        @media (max-width: 640px) {
+          #floatDiagWrap { padding: 0 !important; }
+          #floatDiagBtn { border-radius: 0 !important; padding: 12px 16px !important; gap: 10px !important; }
+          #floatDiagBtn .score-box { display: none !important; }
+          #floatDiagBtn .divider-line { display: none !important; }
+          #floatDiagBtn .banner-text-main { font-size: 13px !important; }
+          #floatDiagBtn .banner-text-sub { display: none !important; }
+          #floatDiagBtn .banner-cta { font-size: 11px !important; padding: 8px 14px !important; white-space: nowrap !important; }
+
+          /* Modal wrapper */
+          #diagModal > div > div { padding: 0.75rem 0.75rem 5rem !important; }
+          #diagModal > div > div > div { border-radius: 16px !important; margin-top: 0.5rem !important; }
+
+          /* Modal header */
+          #diagModal .diag-header { padding: 1.25rem 1.25rem 1rem !important; }
+
+          /* Modal body */
+          #diagModal .diag-body { padding: 1.25rem !important; }
+
+          /* Result: issues grid → 1列 */
+          #drIssues { grid-template-columns: 1fr !important; gap: 0.5rem !important; }
+
+          /* Result: score smaller */
+          #drScore { font-size: 2rem !important; }
+
+          /* Result: desc */
+          #drDesc { font-size: .82rem !important; padding: .85rem 1rem !important; margin: .75rem 0 !important; }
+
+          /* Seron box */
+          #diagResult > div:nth-child(5) { padding: 1.1rem !important; margin: 1rem 0 !important; }
+
+          /* Email box */
+          #diagEmailBox { padding: 1.1rem !important; margin: 1rem 0 !important; }
+          #diagEmailBox input { padding: .65rem .85rem !important; font-size: .84rem !important; }
+          #diagEmailBox button { padding: .75rem !important; font-size: .86rem !important; }
+
+          /* Question card padding */
+          #dqtext { font-size: .92rem !important; margin-bottom: 1rem !important; }
+          body { padding-bottom: 70px !important; }
+        }
         #formStatus { margin-top: 1rem; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 600; display: none; }
         #formStatus.success { display: block; background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         #formStatus.error { display: block; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
@@ -1188,13 +1230,13 @@
   <div id="diagBackdrop" onclick="closeDiag()" style="position:fixed;inset:0;background:rgba(7,61,51,0.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)"></div>
   <div style="position:relative;z-index:9001;min-height:100%;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem 4rem">
     <div style="background:#fff;border-radius:24px;width:100%;max-width:700px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.3);margin-top:3rem">
-      <div style="background:linear-gradient(135deg,var(--primary-dark),var(--primary));padding:2rem 2.5rem 1.75rem;position:relative">
+      <div class="diag-header" style="background:linear-gradient(135deg,var(--primary-dark),var(--primary));padding:2rem 2.5rem 1.75rem;position:relative">
         <button onclick="closeDiag()" style="position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,.15);border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.28)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">✕</button>
         <div style="font-family:Outfit,sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Diagnosis</div>
         <div style="font-family:Outfit,sans-serif;font-size:1.5rem;font-weight:900;color:#fff;line-height:1.3;margin-bottom:.4rem">インバウンド対応度 無料診断</div>
         <div style="font-size:.86rem;color:rgba(255,255,255,.58)">7つの質問に答えるだけ。あなたの店の課題と打ち手が分かります。</div>
       </div>
-      <div style="padding:2rem 2.5rem 2.5rem">
+      <div class="diag-body" style="padding:2rem 2.5rem 2.5rem">
         <div id="diagMain">
           <div style="display:flex;justify-content:space-between;margin-bottom:.4rem">
             <span style="font-size:.76rem;color:var(--text-muted)" id="dplbl">Q1 / 7</span>
@@ -1245,7 +1287,7 @@
 
 <!-- Floating Diagnosis Banner -->
 <div id="floatDiagWrap" style="position:fixed;bottom:0;left:0;right:0;z-index:8000;padding:0 1.5rem 1.25rem;pointer-events:none">
-  <button onclick="openDiag()"
+  <button id="floatDiagBtn" onclick="openDiag()"
     style="pointer-events:auto;width:100%;max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:16px;
     background:#073D33;border-top:3px solid #C9A84C;border-left:none;border-right:none;border-bottom:none;
     border-radius:14px;padding:14px 24px;cursor:pointer;
@@ -1255,22 +1297,22 @@
     onmouseout="this.style.boxShadow='0 -4px 32px rgba(7,61,51,.35),0 8px 24px rgba(0,0,0,.2)'">
 
     <!-- Score box -->
-    <div style="display:flex;flex-direction:column;align-items:center;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.35);border-radius:10px;padding:8px 16px;flex-shrink:0">
+    <div class="score-box" style="display:flex;flex-direction:column;align-items:center;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.35);border-radius:10px;padding:8px 16px;flex-shrink:0">
       <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:#C9A84C;line-height:1">?</div>
       <div style="font-size:9px;color:rgba(201,168,76,.7);font-weight:700;margin-top:3px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">あなたのスコア</div>
     </div>
 
     <!-- Divider -->
-    <div style="width:1px;height:40px;background:rgba(255,255,255,.12);flex-shrink:0"></div>
+    <div class="divider-line" style="width:1px;height:40px;background:rgba(255,255,255,.12);flex-shrink:0"></div>
 
     <!-- Text -->
     <div style="flex:1;text-align:left">
-      <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:3px;line-height:1.3">まずはスコアで、あなたの店のインバウンド対応度を確認する</div>
-      <div style="font-size:11px;color:rgba(255,255,255,.45)">無料 · 7問 · 2分で完了 · 解決方法レポートをお届け</div>
+      <div class="banner-text-main" style="font-size:15px;font-weight:700;color:#fff;margin-bottom:3px;line-height:1.3">まずは外国人に選ばれているか、無料診断してみる</div>
+      <div class="banner-text-sub" style="font-size:11px;color:rgba(255,255,255,.45)">診断後にあなたの課題と解決策をレポートでお届け。</div>
     </div>
 
     <!-- CTA button -->
-    <div style="background:#C9A84C;color:#073D33;font-size:13px;font-weight:800;padding:10px 22px;border-radius:50px;white-space:nowrap;flex-shrink:0;font-family:'Noto Sans JP',sans-serif">
+    <div class="banner-cta" style="background:#C9A84C;color:#073D33;font-size:13px;font-weight:800;padding:10px 22px;border-radius:50px;white-space:nowrap;flex-shrink:0;font-family:'Noto Sans JP',sans-serif">
       診断を始める →
     </div>
   </button>
