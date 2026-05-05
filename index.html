@@ -1271,6 +1271,7 @@
             <div style="font-size:.81rem;color:var(--text-muted);margin-bottom:.9rem;line-height:1.7">診断タイプに合わせた<strong>具体的な解決ステップ・優先アクション・KPI目標</strong>をメールでお送りします。</div>
             <div style="display:flex;flex-direction:column;gap:.55rem;max-width:380px;margin:0 auto">
               <input id="deStoreName" type="text" placeholder="店舗名・会社名" style="width:100%;padding:.75rem 1rem;border:1.5px solid var(--border-light);border-radius:8px;font-size:.88rem;font-family:Noto Sans JP,sans-serif;outline:none" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-light)'">
+              <input id="deContactName" type="text" placeholder="担当者名" style="width:100%;padding:.75rem 1rem;border:1.5px solid var(--border-light);border-radius:8px;font-size:.88rem;font-family:Noto Sans JP,sans-serif;outline:none" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-light)'">
               <input id="deEmail" type="email" placeholder="メールアドレス（必須）" style="width:100%;padding:.75rem 1rem;border:1.5px solid var(--border-light);border-radius:8px;font-size:.88rem;font-family:Noto Sans JP,sans-serif;outline:none" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-light)'">
               <button onclick="sendDiagReport()" style="background:var(--accent);color:#fff;border:none;padding:.85rem;border-radius:8px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:Noto Sans JP,sans-serif">解決方法レポートを受け取る →</button>
             </div>
@@ -1632,7 +1633,7 @@ function closeDiag(){
 // Close on Escape key
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDiag();});
 
-const GAS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbzjgP-Sp7KUYbQJropFZU4ij7YrIxpARd31BUu8WQNuxZHbZk3KsAvpfH7aoPc4gnflsw/exec';
+const GAS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbzeUHBlAEdO2UVdw0pawGqYv_nINfo6tlEhdYcP5H1YidKCkR_RRZ5ACGa7hzZRzhG3Ow/exec';
 
 const dqs=[
   {t:"Googleマップで「（業種）＋エリア名」で検索した時、あなたの店は何位ですか？",c:["上位1〜3位に表示されている","4〜10位に表示されている","11位以下に表示されている","確認したことがない／分からない"],s:[4,3,1,0]},
@@ -1738,6 +1739,7 @@ function diagShowResult(){
 async function sendDiagReport(){
   const email=document.getElementById('deEmail').value;
   const storeName=document.getElementById('deStoreName').value;
+  const contactName=document.getElementById('deContactName').value;
   const msg=document.getElementById('diagEmailMsg');
   if(!email||!email.includes('@')){
     msg.textContent='メールアドレスを正しく入力してください。';
@@ -1751,6 +1753,7 @@ async function sendDiagReport(){
     const params = new URLSearchParams();
     params.append('email', email);
     params.append('storeName', storeName);
+    params.append('contactName', contactName);
     params.append('type', dcurType);
     params.append('score', score);
 
