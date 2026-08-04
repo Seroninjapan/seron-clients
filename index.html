@@ -1595,15 +1595,41 @@
     const HS_PORTAL_ID = '246475706';
     // HubSpot側で作成したフォームのGUIDを貼るとCRMにも登録されます（空ならFormspreeのみ）
     const HS_FORMS = {
-        'free-diagnosis'   : '',   // 例: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
-        'document-request' : '',
-        'partner'          : ''
+        'free-diagnosis'   : 'bba34a46-2c28-4a4b-9f35-6a3e6088a01b',
+        'document-request' : 'd4566e15-aee4-4ce6-b1f9-39f10d0416e3',
+        'partner'          : 'f76d49a7-f3ae-4666-9f6f-c789ce504a12'
     };
     const WINDOW_LABEL = {
         'free-diagnosis'  : '無料診断',
         'document-request': '資料請求',
         'partner'         : '紹介制度・代理店'
     };
+
+    // ══════════════════════════════
+    //  Google アナリティクス(GA4)
+    //  ↓ の '' の中に測定リンクのID（G-で始まるもの）を入れるだけで計測が始まります
+    //  空の間はスクリプトを読み込まず、何も送信しません
+    // ══════════════════════════════
+    const GA_MEASUREMENT_ID = '';   // 例: 'G-ABCD1234EF'
+    const GA_EVENT = {
+        'free-diagnosis'  : 'cta_free_diagnosis',
+        'document-request': 'cta_document_request',
+        'partner'         : 'cta_partner_inquiry'
+    };
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+    if (GA_MEASUREMENT_ID) {
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+        document.head.appendChild(gaScript);
+        gtag('js', new Date());
+        gtag('config', GA_MEASUREMENT_ID);
+    }
+    function gaEvent(name, params){
+        if (!GA_MEASUREMENT_ID) return;
+        gtag('event', name, params || {});
+    }
 
     window._hsq = window._hsq || [];
     function hsTrack(path, title){
@@ -1647,6 +1673,7 @@
     // 3つの窓口
     function openWindow(id){
         hsTrack('/lp/' + id, WINDOW_LABEL[id] || id);
+        gaEvent(GA_EVENT[id] || 'cta_click', { cta_id: id, cta_label: WINDOW_LABEL[id] || id });
         document.querySelectorAll('.fbox').forEach(d => { d.open = (d.id === id); });
         const t = document.getElementById(id);
         if (t) setTimeout(() => t.scrollIntoView({behavior:'smooth', block:'start'}), 60);
@@ -1671,6 +1698,7 @@
                 hsIdentify(mail, { company: (form.querySelector('[name="会社名・店舗名"]')||{value:''}).value });
                 hsTrack('/lp/' + kind + '/thanks', (WINDOW_LABEL[kind]||kind) + ' 送信完了');
                 hsSubmitForm(kind, form);
+                gaEvent('generate_lead', { form_type: kind, form_label: WINDOW_LABEL[kind] || kind });
                 // Google Apps Script への転送（URL未設定なら送信しない）
                 if (typeof GAS_WEBHOOK === 'string' && GAS_WEBHOOK) {
                     const g = new URLSearchParams();
