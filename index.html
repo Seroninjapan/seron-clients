@@ -1306,12 +1306,7 @@ document.querySelectorAll('form.sform').forEach(function(form){
     })
     .then(function(res){
       if (!res.ok) throw new Error(res.status);
-      if (typeof gtag === 'function') {
-        gtag('event', 'generate_lead', { form_type: kind, form_label: KIND_LABEL[kind] });
-      }
-      if (typeof fbq === 'function') {
-        fbq('track', 'Lead', { content_name: KIND_LABEL[kind], content_category: kind });
-      }
+      // 計測タグはサンクスページ側で発火させる（二重計上の防止）
       form.reset();
       location.href = THANKS[kind];
     })
