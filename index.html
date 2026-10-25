@@ -8,8 +8,9 @@
 
 <script>
 /* 計測タグ（Google・Meta・HubSpot）。IDは従来のLPと同じ。
-   手元での確認（localhost／ファイルを直接開いた場合など、http・https 以外）だけ読み込まない。公開先では必ず動く。 */
-var SERON_LOCAL=!/^https?:$/.test(location.protocol)||/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+   手元での確認（localhost／ファイルを直接開いた場合など、http・https 以外）と、
+   作業用ブランチを表示する確認用の閲覧サービス（githack.com）では読み込まない。公開先では必ず動く。 */
+var SERON_LOCAL=!/^https?:$/.test(location.protocol)||/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)||/(^|\.)githack\.com$/.test(location.hostname);
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 if(!SERON_LOCAL){
   (function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-ZDBEF48445';document.head.appendChild(s);})();
@@ -219,6 +220,8 @@ h2{font-size:clamp(24px,2.5vw,31px);font-weight:900;line-height:1.45;letter-spac
 .plan dt{color:var(--sub)}
 .plan dd{font-weight:700}
 .plan dd small{font-size:.86em;font-weight:500}
+.plan dd a{color:var(--g2);text-decoration:underline;text-underline-offset:3px}
+.plan dd .est{display:block;font-size:.86em;font-weight:500;color:var(--sub);line-height:1.6;margin-top:2px;word-break:keep-all;overflow-wrap:anywhere}
 .plan .zero{flex:0 0 auto;font-size:64px;font-weight:900;color:var(--g2);line-height:1;letter-spacing:-.02em}
 .plan .zero i{font-style:normal;font-size:.42em;margin-left:2px}
 .pnotes{position:relative;margin:26px 0 0 272px;max-width:720px;font-size:13.5px;line-height:1.85;color:var(--ink)}
@@ -632,8 +635,7 @@ details[open] summary::after{content:"−"}
         <h3>スタンダードプラン</h3>
         <div class="plan-b">
           <dl>
-            <div><dt>初期費用</dt><dd>50,000円<small>（税別）</small></dd></div>
-            <div><dt>サービス利用料</dt><dd>月額20,000円<small>（税別）</small></dd></div>
+            <div><dt>料金</dt><dd><a href="#consult">お問い合わせください</a><span class="est">（店舗の状況に合わせて<wbr>個別にお見積りします）</span></dd></div>
             <div><dt>モニター人数</dt><dd>毎月10名の来店を保証</dd></div>
             <div><dt>利用期間</dt><dd>最低6ヶ月契約</dd></div>
           </dl>
